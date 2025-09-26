@@ -1,0 +1,72 @@
+<section class="featured-insurances">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Conozca Nuestros Seguros Destacados</h2>
+      <p class="section-subtitle">Encuentra la protección perfecta para ti y tu familia</p>
+    </div>
+
+    <!-- Pestañas -->
+    <div class="tabs-container">
+      <div class="tabs">
+        <button 
+          *ngFor="let tab of tabs"
+          class="tab-button"
+          [class.active]="activeTab === tab.id"
+          (click)="selectTab(tab.id)"
+        >
+          <i [class]="tab.icon"></i>
+          <span>{{ tab.label }}</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Contenido de la pestaña activa -->
+    <div class="tab-content">
+      <div class="content-wrapper">
+        <div class="content-text">
+          <h3 class="content-title">{{ currentInsurance.title }}</h3>
+          <p class="content-subtitle">{{ currentInsurance.subtitle }}</p>
+          
+          <ul class="features-list">
+            <li *ngFor="let feature of currentInsurance.features" class="feature-item">
+              <i class="fas fa-check feature-icon"></i>
+              <span>{{ feature }}</span>
+            </li>
+          </ul>
+
+          <button class="btn btn-primary" (click)="onKnowMore()">
+            {{ currentInsurance.buttonText }}
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <div class="content-image">
+          <div class="image-container">
+            <img 
+              [src]="currentInsurance.imageUrl" 
+              [alt]="currentInsurance.title"
+              class="insurance-image"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón de ayuda flotante -->
+    <div class="floating-help">
+      <button class="help-button">
+        <span class="help-text">¿Necesita Ayuda?</span>
+        <i class="fas fa-question"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+

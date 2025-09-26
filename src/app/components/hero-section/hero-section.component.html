@@ -1,0 +1,136 @@
+<!-- Hero Banner según especificaciones de 47 puntos -->
+<section class="hero" role="banner">
+  <div class="container">
+    <!-- Layout de 2 columnas (Puntos 6-9) -->
+    <div class="hero__content">
+      <!-- Columna izquierda: Texto + buscador (45% ancho) -->
+      <div class="hero__left">
+        <!-- Título (Punto 10) -->
+        <h1 class="hero__title">
+          Tranquilo, seguro aquí encuentra todo lo que necesita
+        </h1>
+        
+        <!-- Subtítulo (Punto 11) -->
+        <p class="hero__subtitle">
+          <strong>Use nuestro nuevo buscador para:</strong> cotizar un seguro, gestionar el que ya tiene o resolver alguna duda.
+        </p>
+
+        <!-- Buscador pill (Punto 12) -->
+        <div class="search-container">
+          <div class="search-wrapper">
+            <input
+              type="text"
+              class="search-input"
+              placeholder='Ej: "Quiero renovar mi seguro" o "Necesito un conductor elegido"'
+              [formControl]="searchControl"
+              (keyup.enter)="onSearch()"
+              aria-label="Buscar seguros y servicios"
+            />
+            <!-- Icono micrófono (Punto 12) -->
+            <button 
+              class="search-mic" 
+              type="button"
+              aria-label="Búsqueda por voz"
+              (click)="onVoiceSearch()"
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V14h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-1.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/>
+                <path d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0v5zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3z"/>
+              </svg>
+            </button>
+            <!-- Botón lupa (Punto 12) -->
+            <button 
+              class="search-button" 
+              type="button"
+              aria-label="Buscar"
+              (click)="onSearch()"
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                <path d="m13.498 12.076-.005.005-.005.004a1 1 0 0 1-1.414 0l-3.5-3.5a1 1 0 0 1 0-1.414l.005-.005.004-.005a1 1 0 0 1 1.414 0l3.5 3.5a1 1 0 0 1 0 1.415z"/>
+                <path d="M6.5 0a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM1 6.5a5.5 5.5 0 1 1 11 0 5.5 5.5 0 0 1-11 0z"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Resultados de búsqueda -->
+          <div class="search-results" *ngIf="showResults" role="listbox">
+            <div class="results-header">
+              <span class="results-title">Resultados de búsqueda</span>
+              <button class="close-results" (click)="closeResults()" aria-label="Cerrar resultados">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                  <path d="M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z"/>
+                </svg>
+              </button>
+            </div>
+            
+            <div class="loading" *ngIf="isLoading" role="status" aria-live="polite">
+              <div class="spinner" aria-hidden="true"></div>
+              <span>Buscando...</span>
+            </div>
+
+            <div class="results-list" *ngIf="!isLoading && searchResults.length > 0">
+              <div 
+                class="result-item" 
+                *ngFor="let product of searchResults"
+                (click)="selectProduct(product)"
+                role="option"
+                [attr.aria-label]="product.title + '. ' + product.description"
+              >
+                <div class="result-content">
+                  <h4 class="result-title">{{ product.title }}</h4>
+                  <p class="result-description">{{ product.description }}</p>
+                  <span class="result-price" *ngIf="product.price">{{ product.price }}</span>
+                </div>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                  <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="no-results" *ngIf="!isLoading && searchResults.length === 0">
+              <svg width="48" height="48" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                <path d="m13.498 12.076-.005.005-.005.004a1 1 0 0 1-1.414 0l-3.5-3.5a1 1 0 0 1 0-1.414l.005-.005.004-.005a1 1 0 0 1 1.414 0l3.5 3.5a1 1 0 0 1 0 1.415z"/>
+                <path d="M6.5 0a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM1 6.5a5.5 5.5 0 1 1 11 0 5.5 5.5 0 0 1-11 0z"/>
+              </svg>
+              <p>No se encontraron resultados</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna derecha: Banner responsive con imágenes optimizadas -->
+      <div class="hero__right">
+        <div class="hero-banner" role="presentation">
+          <picture class="banner-picture">
+            <!-- Imagen para móvil (hasta 767px) -->
+            <source 
+              media="(max-width: 767px)" 
+              srcset="assets/Image/Banner/Banner-mobile.png"
+            >
+            <!-- Imagen para desktop (768px en adelante) -->
+            <source 
+              media="(min-width: 768px)" 
+              srcset="assets/Image/Banner/Banner-desktop.png"
+            >
+            <!-- Fallback: imagen desktop por defecto -->
+            <img 
+              class="banner-image"
+              src="assets/Image/Banner/Banner-desktop.png" 
+              alt="Banner promocional Seguros Bolívar"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            >
+          </picture>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+

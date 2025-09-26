@@ -1,0 +1,295 @@
+// Header Component SCSS - Metodología BEM (punto 31)
+// Implementa especificaciones de los puntos 1-31
+
+// Header con especificaciones exactas - 1440px width, 60px height
+.hdr {
+  width: 100%;
+  height: 60px; // Altura exacta 60px
+  background-color: var(--c-lib-tb-grayscaleWhite);
+  border-bottom: none; // Eliminar borde, usar solo sombra
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  font-family: var(--c-lib-tb-font-family); // Bolivar
+  font-size: var(--c-lib-tb-fontsizeLabel);
+  font-weight: 500;
+  // Sombras específicas aplicadas
+  box-shadow: 
+    2px 2px 16px 0px rgba(115, 115, 115, 0.16), 
+    2px 8px 8px 0px rgba(115, 115, 115, 0.04);
+
+  // Contenedor interno con ancho 1440px
+  &__inner {
+    width: 1440px; // Ancho exacto del proyecto
+    margin: 0 auto;
+    padding-left: 32px; // Padding específico left
+    padding-right: 32px; // Padding específico right
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px; // Gap específico 16px
+  }
+
+  // Logo (punto 8)
+  &__logo {
+    display: flex;
+    align-items: center;
+    margin-right: 16px; // punto 8
+    
+    .logo-btn {
+      background: none;
+      border: none;
+      padding: 4px; // zona clicable mínima 32px de alto
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      min-height: 32px; // punto 8
+      
+      &:focus-visible {
+        outline: 2px solid var(--focus-blue);
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+    }
+    
+    .logo-svg {
+      height: 24px; // punto 8
+      width: auto;
+    }
+  }
+}
+
+// Navegación central por segmentos - especificaciones exactas
+.seg {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex: 1;
+
+  &__item {
+    height: auto;
+    padding: 8px 12px;
+    border-radius: 0;
+    border: none; // Sin bordes
+    background: transparent;
+    color: var(--c-lib-tb-primaryD200); // #05794A
+    font-family: var(--c-lib-tb-font-family); // Bolivar
+    font-size: var(--c-lib-tb-fontsizeBody); // 16px
+    font-weight: 700;
+    line-height: 1.4; // 140%
+    letter-spacing: 0;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    // Estado hover
+    &:hover {
+      background-color: var(--c-lib-tb-primaryL400);
+      opacity: 0.8;
+    }
+    
+    // Estado activo
+    &.is-active {
+      font-weight: 700; // Mantener el mismo peso
+      background-color: var(--c-lib-tb-primaryL400);
+      position: relative;
+      
+      // Barra inferior de 2px
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background-color: var(--c-lib-tb-primaryD200); // #05794A
+      }
+    }
+    
+    // Focus visible
+    &:focus-visible {
+      outline: 2px solid var(--c-lib-tb-primaryL100);
+      outline-offset: 2px;
+    }
+  }
+}
+
+// Acciones del header con gap específico
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 16px; // Gap consistente con especificaciones
+  flex-shrink: 0;
+}
+
+// Avatar circular de perfil usando tech-block-lib tokens
+.profile-btn {
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--c-lib-tb-primaryL100);
+  background: var(--c-lib-tb-grayscaleWhite);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  overflow: hidden; // Para que la imagen se recorte en círculo
+  padding: 0; // Sin padding para que la imagen ocupe todo el espacio
+  
+  // Imagen del avatar
+  .profile-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; // Para mantener proporciones
+    border-radius: 50%; // Circular
+  }
+  
+  // SVG (fallback)
+  svg {
+    width: 16px;
+    height: 16px;
+    color: var(--c-lib-tb-primaryBase);
+  }
+  
+  // Hover
+  &:hover {
+    box-shadow: var(--c-lib-tb-shadowS);
+    border-color: var(--c-lib-tb-primaryBase);
+    background-color: var(--c-lib-tb-primaryL400);
+    transform: translateY(-1px);
+  }
+  
+  // Active
+  &:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+  
+  // Focus visible
+  &:focus-visible {
+    outline: 2px solid var(--c-lib-tb-primaryL100);
+    outline-offset: 2px;
+  }
+}
+
+// Los estilos de los dropdowns ahora están en el componente dropdown reutilizable
+// Este espacio está disponible para otros estilos del header si son necesarios
+
+// Menú móvil usando tech-block-lib tokens
+.mobile-segment-select {
+  display: none;
+  height: 32px;
+  padding: 0 8px;
+  border: 1px solid var(--c-lib-tb-grayscaleL100);
+  border-radius: 8px;
+  background: var(--c-lib-tb-grayscaleWhite);
+  color: var(--c-lib-tb-primaryBase);
+  font-family: var(--c-lib-tb-font-family);
+  font-size: var(--c-lib-tb-fontsizeLabel);
+  cursor: pointer;
+  
+  &:focus {
+    outline: 2px solid var(--c-lib-tb-primaryL100);
+    outline-offset: 2px;
+  }
+}
+
+// Breakpoints responsivos adaptados para 1440px base
+@media (max-width: 1439px) {
+  .hdr__inner {
+    width: 100%; // En pantallas menores usar 100%
+    max-width: 1200px; // Máximo contenido
+    padding-left: 24px; // Reducir padding en pantallas menores
+    padding-right: 24px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+  .hdr__inner {
+    padding-left: 16px;
+    padding-right: 16px;
+    gap: 12px; // Reducir gap en tablets
+  }
+  
+  .seg__item {
+    padding: 6px 10px; // Ajustar padding en tablets
+    font-size: var(--c-lib-tb-fontsizeLabel); // 14px en tablets
+  }
+  
+  .actions {
+    gap: 12px; // Reducir gap en tablets
+  }
+}
+
+@media (max-width: 767px) {
+  .hdr__inner {
+    padding-left: 16px;
+    padding-right: 16px;
+    gap: 8px; // Gap reducido para móvil
+  }
+  
+  .hdr {
+    .hdr__logo .logo-svg {
+      height: 20px; // Logo más pequeño en móvil
+    }
+    
+    .seg {
+      display: none; // Ocultar chips
+    }
+    
+    .mobile-segment-select {
+      display: block; // Mostrar select
+    }
+    
+    .actions {
+      gap: 8px; // Gap móvil más pequeño
+      
+      // Botones más compactos en móvil
+      .btn-pagos,
+      .btn-ingrese {
+        width: auto;
+        min-width: 120px;
+        padding: 6px 12px;
+        font-size: var(--c-lib-tb-fontsizeLabel); // 14px en móvil
+        
+        span {
+          display: inline; // Mantener texto visible
+        }
+      }
+    }
+  }
+}
+
+// Tamaños clicables móviles (punto 26)
+@media (max-width: 767px) {
+  .seg__item,
+  .profile-btn,
+  .btn-pagos,
+  .btn-ingrese {
+    min-height: 44px; // punto 26 - áreas ≥44×44px
+    min-width: 44px;
+  }
+  
+  .seg__item {
+    padding: 0 16px; // punto 26 - aumentar padding en touch
+  }
+}
+
+// Estilos globales para overlays
+:host ::ng-deep {
+  .pagos-dropdown-overlay {
+    z-index: 101;
+  }
+}
+
+// Prefers color scheme support - preparado para tema oscuro
+@media (prefers-color-scheme: dark) {
+  /* Futuro soporte para tema oscuro usando tech-block-lib tokens */
+}

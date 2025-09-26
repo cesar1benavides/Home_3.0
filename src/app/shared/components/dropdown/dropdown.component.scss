@@ -1,0 +1,396 @@
+// Dropdown Component - Sistema de Design Tokens Seguros Bolívar
+
+/* ===================================================
+   CONTENEDOR PRINCIPAL
+   =================================================== */
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+
+  &.is-open {
+    z-index: 1001;
+  }
+}
+
+/* ===================================================
+   BOTONES BASE - ESPECIFICACIONES EXACTAS
+   =================================================== */
+
+// Botón base con estilos comunes
+.dropdown-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  font-family: var(--c-lib-tb-font-family); // Bolivar
+  font-weight: 700;
+  font-size: var(--c-lib-tb-fontsizeBody); // 16px
+  line-height: 1.4; // 140%
+  letter-spacing: 0;
+  text-align: center;
+  transition: all 0.2s ease;
+  outline: none;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--c-lib-tb-primaryL100);
+    outline-offset: 2px;
+  }
+}
+
+// Clase específica para botón Pagos
+.dropdown-btn-pagos {
+  width: 142px;
+  height: 40px;
+  padding: 8px 16px;
+  gap: 8px;
+  border-radius: 50px;
+  background: var(--c-lib-tb-grayscaleWhite); // #FFFFFF
+  border: 1px solid var(--c-lib-tb-primaryD100); // #038450
+  color: var(--c-lib-tb-primaryD200); // Color del texto
+
+  .dropdown-label {
+    color: var(--c-lib-tb-primaryD200);
+  }
+
+  &:hover {
+    background: var(--c-lib-tb-primaryL400);
+    transform: translateY(-1px);
+    box-shadow: var(--c-lib-tb-shadowS);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+}
+
+// Clase específica para botón Ingrese
+.dropdown-btn-ingrese {
+  width: 153px;
+  height: 40px;
+  padding: 8px 16px;
+  gap: 8px;
+  border-radius: 50px;
+  background: var(--c-lib-tb-secondaryBase); // #FFE16F
+  border: none;
+  color: var(--c-lib-tb-primaryD200); // Color del texto
+
+  .dropdown-label {
+    color: var(--c-lib-tb-primaryD200);
+  }
+
+  &:hover {
+    background: var(--c-lib-tb-secondaryD100);
+    transform: translateY(-1px);
+    box-shadow: var(--c-lib-tb-shadowS);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+}
+
+// Botón por defecto (fallback)
+.dropdown-btn-default {
+  width: 168px;
+  height: 40px;
+  padding: 8px 16px;
+  gap: 8px;
+  border-radius: 8px;
+  background: var(--c-lib-tb-grayscaleL400);
+  border: none;
+  color: var(--c-lib-tb-primaryD200);
+
+  &:hover {
+    background: var(--c-lib-tb-grayscaleL300);
+  }
+}
+
+/* ===================================================
+   ELEMENTOS DEL BOTÓN
+   =================================================== */
+
+.dropdown-label {
+  flex: 1;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown-icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s ease;
+
+  &.rotated {
+    transform: rotate(180deg);
+  }
+}
+
+/* ===================================================
+   MENÚ DROPDOWN
+   =================================================== */
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: var(--c-lib-tb-grayscaleWhite);
+  border: 1px solid var(--c-lib-tb-grayscaleL200);
+  border-radius: 12px;
+  box-shadow: var(--c-lib-tb-shadowL);
+  z-index: 1002;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all 0.2s ease;
+  min-width: 200px;
+  max-height: 300px;
+  overflow: hidden;
+
+  &.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  // Posicionamiento
+  &.position-bottom-left {
+    left: 0;
+    right: auto;
+  }
+
+  &.position-bottom-right {
+    left: auto;
+    right: 0;
+  }
+
+  &.position-top-left {
+    top: auto;
+    bottom: calc(100% + 8px);
+    left: 0;
+    right: auto;
+    transform: translateY(8px);
+    
+    &.show {
+      transform: translateY(0);
+    }
+  }
+
+  &.position-top-right {
+    top: auto;
+    bottom: calc(100% + 8px);
+    left: auto;
+    right: 0;
+    transform: translateY(8px);
+    
+    &.show {
+      transform: translateY(0);
+    }
+  }
+}
+
+.dropdown-content {
+  padding: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+
+  // Scrollbar personalizada
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--c-lib-tb-grayscaleL300);
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--c-lib-tb-grayscaleL100);
+    border-radius: 3px;
+
+    &:hover {
+      background: var(--c-lib-tb-grayscaleBase);
+    }
+  }
+}
+
+/* ===================================================
+   ITEMS DEL MENÚ
+   =================================================== */
+
+.dropdown-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  color: var(--c-lib-tb-grayscaleBlack);
+  font-family: var(--c-lib-tb-font-family);
+  font-size: var(--c-lib-tb-fontsizeLabel); // 14px
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--c-lib-tb-primaryL400);
+    color: var(--c-lib-tb-primaryD100);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--c-lib-tb-primaryL100);
+    outline-offset: -2px;
+  }
+
+  &.disabled,
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    
+    &:hover {
+      background: none;
+      color: var(--c-lib-tb-grayscaleBlack);
+    }
+  }
+}
+
+.dropdown-item-icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: var(--c-lib-tb-primaryBase);
+}
+
+.dropdown-item-text {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown-item-badge {
+  flex-shrink: 0;
+  padding: 2px 8px;
+  background: var(--c-lib-tb-primaryBase);
+  color: var(--c-lib-tb-grayscaleWhite);
+  font-size: var(--c-lib-tb-fontsizeCaption); // 12px
+  font-weight: 600;
+  border-radius: 12px;
+  min-width: 18px;
+  text-align: center;
+}
+
+/* ===================================================
+   OVERLAY
+   =================================================== */
+
+.dropdown-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  z-index: 1000;
+  cursor: default;
+}
+
+/* ===================================================
+   ESTADOS ESPECIALES
+   =================================================== */
+
+// Dividers entre items
+.dropdown-item.divider {
+  padding: 0;
+  margin: 8px 0;
+  height: 1px;
+  background: var(--c-lib-tb-grayscaleL200);
+  cursor: default;
+  
+  &:hover {
+    background: var(--c-lib-tb-grayscaleL200);
+  }
+}
+
+/* ===================================================
+   RESPONSIVE
+   =================================================== */
+
+@media (max-width: 767px) {
+  .dropdown-menu {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%) translateY(-8px);
+    min-width: 250px;
+
+    &.show {
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  .dropdown-btn-pagos,
+  .dropdown-btn-ingrese {
+    min-width: 120px;
+    width: auto;
+  }
+}
+
+/* ===================================================
+   ANIMACIONES Y TRANSICIONES
+   =================================================== */
+
+// Animación de entrada para el menú
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-menu.show {
+  animation: dropdownFadeIn 0.2s ease;
+}
+
+/* ===================================================
+   ACCESIBILIDAD
+   =================================================== */
+
+// Estados focus para navegación por teclado
+.dropdown-trigger:focus-visible,
+.dropdown-item:focus-visible {
+  outline: 2px solid var(--c-lib-tb-primaryL100);
+  outline-offset: 2px;
+}
+
+// Soporte para prefers-reduced-motion
+@media (prefers-reduced-motion: reduce) {
+  .dropdown-trigger,
+  .dropdown-menu,
+  .dropdown-item,
+  .dropdown-icon {
+    transition: none;
+  }
+
+  .dropdown-menu.show {
+    animation: none;
+  }
+}

@@ -1,0 +1,81 @@
+<!-- Header con estructura completa según especificación (puntos 1-7) -->
+<header class="hdr">
+  <div class="hdr__inner">
+    <!-- Logo (punto 8) -->
+    <div class="hdr__logo">
+      <button class="logo-btn" type="button" aria-label="Ir a inicio">
+        <svg 
+          class="logo-svg" 
+          width="200" 
+          height="24" 
+          viewBox="0 0 200 24"
+          aria-hidden="true"
+        >
+          <image href="https://dphwwzkmou6a6.cloudfront.net/assets/img/icons/LogotipoSegurosBolivar.svg" 
+                 width="200" 
+                 height="24" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Navegación central por segmentos (puntos 9-14, 27) -->
+    <nav class="seg" role="tablist" aria-label="Segmentos de usuario">
+      <button
+        *ngFor="let segment of segments"
+        class="seg__item"
+        [class.is-active]="activeSegment === segment.key"
+        role="tab"
+        [attr.aria-selected]="activeSegment === segment.key"
+        [attr.data-segment]="segment.key"
+        [attr.tabindex]="activeSegment === segment.key ? 0 : -1"
+        (click)="onSegmentClick(segment.key)"
+        type="button"
+      >
+        {{ segment.label }}
+      </button>
+    </nav>
+
+    <!-- Acciones del header con nuevos dropdowns -->
+    <div class="actions">
+      <!-- Avatar circular de perfil -->
+      <button class="profile-btn" type="button" aria-label="Perfil de usuario">
+        <img 
+          src="assets/Image/946e672fdcedb55ba3675a087beb1ede76f5c97e.jpg" 
+          alt="Avatar de usuario"
+          class="profile-avatar"
+          width="28" 
+          height="28"
+        >
+      </button>
+
+      <!-- Dropdown Pagos con especificaciones exactas -->
+      <app-dropdown
+        label="Pagos"
+        [items]="pagosMenuItems"
+        buttonClass="dropdown-btn-pagos"
+        icon="chevron"
+        position="bottom-left"
+        (itemSelected)="onPagosItemSelected($event)"
+      ></app-dropdown>
+
+      <!-- Dropdown Ingrese con especificaciones exactas -->
+      <app-dropdown
+        label="Ingrese"
+        [items]="ingreseMenuItems"
+        buttonClass="dropdown-btn-ingrese"
+        icon="arrow"
+        position="bottom-right"
+        [disabled]="disabled"
+        (itemSelected)="onIngreseItemSelected($event)"
+      ></app-dropdown>
+    </div>
+
+    <!-- Menú móvil (punto 29 <768px) -->
+    <select class="mobile-segment-select" aria-label="Seleccionar segmento">
+      <option *ngFor="let segment of segments" [value]="segment.key" [selected]="activeSegment === segment.key">
+        {{ segment.label }}
+      </option>
+    </select>
+  </div>
+</header>
+

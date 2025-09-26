@@ -1,0 +1,90 @@
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <!-- Columna 1: Acerca de nosotros -->
+      <div class="footer-column">
+        <h3 class="column-title">ACERCA DE NOSOTROS</h3>
+        <ul class="footer-links">
+          <li *ngFor="let link of aboutLinks">
+            <a href="#" (click)="openLink(link.url); $event.preventDefault()" class="footer-link">
+              {{ link.text }}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Columna 2: Informes -->
+      <div class="footer-column">
+        <h3 class="column-title">INFORMES</h3>
+        <ul class="footer-links">
+          <li *ngFor="let link of reportLinks">
+            <a href="#" (click)="openLink(link.url); $event.preventDefault()" class="footer-link">
+              {{ link.text }}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Columna 3: Canales de atención -->
+      <div class="footer-column">
+        <h3 class="column-title">CANALES DE ATENCIÓN</h3>
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fab fa-whatsapp"></i>
+            <a href="#" (click)="openWhatsApp(); $event.preventDefault()" class="contact-link">
+              WhatsApp: {{ contactInfo.whatsapp }}
+            </a>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-mobile-alt"></i>
+            <span class="contact-text">Celular: {{ contactInfo.celular }}</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <span class="contact-text">Línea nacional: {{ contactInfo.lineaNacional }}</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <span class="contact-text">Línea en Bogotá: {{ contactInfo.lineaBogota }}</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span class="contact-text">{{ contactInfo.direccion }}</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <a href="#" (click)="openEmail(); $event.preventDefault()" class="contact-link">
+              {{ contactInfo.email }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Línea separadora -->
+    <div class="footer-divider"></div>
+
+    <!-- Fila inferior con logos y enlaces adicionales -->
+    <div class="footer-bottom">
+      <div class="bottom-links">
+        <a 
+          *ngFor="let link of bottomLinks" 
+          href="#" 
+          (click)="openLink(link.url); $event.preventDefault()" 
+          class="bottom-link"
+        >
+          {{ link.text }}
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+
+
+
+
