@@ -304,15 +304,28 @@
 }
 
 .help-alert {
-  width: 271px;
-  height: 64px;
+  width: auto;
+  max-width: 328px;
+  min-height: 64px;
   background: #FFF6D4;
   border-radius: 8px;
   box-shadow: 1px 1px 8px 0px #73737329, 1px 4px 4px 0px #7373730A;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto; // flag | content | close
   align-items: center;
-  justify-content: space-between;
-  padding: 12px 12px 12px 12px;
+  column-gap: 12px;
+  padding: 12px 16px;
+}
+
+.help-alert-flag {
+  width: 6px;
+  height: 32px;
+  border-radius: 8px;
+  transform: rotate(0deg);
+  opacity: 1;
+  background: #FFC100;
+  display: inline-block;
+  margin-right: 12px;
 }
 
 .help-alert-content {
@@ -325,7 +338,7 @@
   color: #0B613E;
   font-family: Bolivar;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 140%;
 }
 
@@ -343,6 +356,11 @@
   color: #0B613E;
   font-size: 18px;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
 }
 
 .help-avatar {
@@ -350,7 +368,7 @@
   height: 72px;
   border-radius: 50px;
   border: 3px solid #FFE16F;
-  background: #FFFFFF;
+  background: #FFE16F;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -360,8 +378,8 @@
 }
 
 .help-avatar-icon {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   object-fit: contain;
 }
 
@@ -413,12 +431,13 @@
 
 @media (max-width: 768px) {
   .featured-insurances {
-    // Tamaño exacto del contenedor en mobile (imagen guía)
+    // Contenedor fluido en mobile para evitar superposición con el footer
     width: 328px; // width: 328
-    height: 740.466px; // height: 740.4657592773438
+    height: auto; // Altura automática según contenido
     margin: 0 auto; // Centrar dentro del viewport
-    padding: 0; // Ajustar para calzar con pestañas
+    padding: 0 0 16px 0; // Espacio inferior para separar del footer
     opacity: 1; // opacity: 1
+    overflow: visible; // Asegurar que nada se recorte
   }
 
   // Alinear todo el contenido al ancho de las pestañas
@@ -473,6 +492,7 @@
 
         span {
           display: inline; // Mostrar texto en mobile
+          white-space: normal; // Permitir salto de línea en etiquetas de pestañas
         }
       }
     }
@@ -481,15 +501,25 @@
   .tab-content {
     width: 328px; // Igual al ancho de las pestañas
     margin: 0 auto;
+    height: auto; // Evitar recortes por altura fija
+    overflow: visible; // Permitir que el contenido crezca
+    padding-bottom: 16px; // Separación adicional al final
     .content-wrapper {
       grid-template-columns: 1fr;
       gap: 24px; // Compactar para altura total fija
       text-align: center;
+      // Evitar que los hijos recorten texto
+      > .content-text,
+      > .content-image {
+        overflow: visible;
+      }
     }
 
     .content-text {
       .content-title {
         font-size: 24px;
+        white-space: normal; // Evitar recorte de títulos largos
+        overflow-wrap: anywhere; // Permitir quiebres seguros
       }
 
       .content-subtitle {
@@ -505,7 +535,9 @@
 
     .content-image {
       .image-container {
-        height: 320px; // Alargar ligeramente para ocupar mejor el alto
+        height: auto; // Ajustar a la altura de la imagen
+        max-height: none;
+        aspect-ratio: auto; // Permitir que la imagen defina su proporción
       }
     }
   }

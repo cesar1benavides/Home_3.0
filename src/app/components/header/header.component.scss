@@ -335,6 +335,12 @@
   // Mostrar botón OlivIA en desktop
   .profile-btn {
     display: flex;
+
+    // Forzar tamaño estándar de icono en desktop
+    .olivia-icon {
+      width: 24px;
+      height: 24px;
+    }
   }
 
   // Ocultar botón menú en desktop
@@ -374,6 +380,7 @@
   
   // Safe area support (iOS)
   padding-right: env(safe-area-inset-right);
+  overflow-y: auto; // Permitir scroll para ver todas las opciones
 }
 
 .drawer-close {
@@ -544,6 +551,79 @@
       text-align: center; // Mantener alineación
       vertical-align: middle; // Mantener alineación vertical
     }
+  }
+}
+
+// Mejora visual del drawer móvil (menú hamburguesa)
+@media (max-width: 768px) {
+  .mobile-drawer {
+    background: rgba(0, 0, 0, 0.5); // Fondo más suave
+    backdrop-filter: blur(1px);
+  }
+
+  .drawer-panel {
+    width: 88vw; // Un poco más amplio para móvil
+    max-width: 360px;
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+    padding: 12px 12px 16px 12px; // Más aire interno
+    gap: 12px;
+  }
+
+  .drawer-sections {
+    gap: 12px;
+  }
+
+  .drawer-section {
+    border-radius: 14px;
+    border: 1px solid var(--c-lib-tb-grayscaleL200);
+    background: var(--c-lib-tb-grayscaleWhite);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    padding: 10px 10px 6px 10px;
+  }
+
+  .drawer-title {
+    font-size: 16px; // Leve aumento para jerarquía
+    margin: 0 0 8px 2px;
+    color: var(--c-lib-tb-primaryD200);
+  }
+
+  .drawer-items {
+    gap: 8px;
+  }
+
+  .drawer-item {
+    position: relative;
+    padding: 10px 12px; // Compactar padding
+    min-height: 44px; // Mantener accesibilidad
+    border: 1px solid var(--c-lib-tb-grayscaleL200);
+    border-radius: 12px;
+    background: var(--c-lib-tb-grayscaleWhite);
+
+    // Indicador visual de navegación
+    &::after {
+      content: "›";
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--c-lib-tb-primaryD100);
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    &:hover {
+      background: var(--c-lib-tb-primaryL400);
+      border-color: var(--c-lib-tb-primaryD100);
+    }
+  }
+
+  .drawer-link {
+    border-radius: 12px;
+    border: 1px solid var(--c-lib-tb-grayscaleL200);
+    background: var(--c-lib-tb-grayscaleWhite);
+    padding: 10px 14px; // Compactar padding
+    min-height: 44px; // Mantener accesibilidad
   }
 }
 

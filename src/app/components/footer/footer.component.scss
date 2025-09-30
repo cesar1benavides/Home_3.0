@@ -215,29 +215,7 @@
 /* Se eliminaron el separador y la franja inferior de enlaces/redes */
 
 // Copyright
-.footer-copyright {
-  text-align: center;
-  padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  width: 100%;
-
-  p {
-    font-family: Bolivar;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 140%;
-    letter-spacing: 0px;
-    color: var(--white);
-    opacity: 0.8;
-    margin: 0;
-    
-    // Manejo de texto largo para copyright
-    word-wrap: break-word;
-    hyphens: auto;
-    max-width: 100%;
-    padding: 0 16px; // Padding para que no toque los bordes
-  }
-}
+// Se elimina la sección de copyright
 
 // Responsive Design
 @media (max-width: 1024px) {
@@ -306,6 +284,10 @@
   }
 
   .footer-column {
+    // Ocultar los dividers en móvil, manteniendo el acordeón
+    .divider {
+      display: none !important;
+    }
     .column-title {
       // Mantener especificaciones completas en móvil
       font-family: Bolivar;

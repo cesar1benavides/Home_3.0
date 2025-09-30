@@ -95,7 +95,7 @@
                       srcset="assets/Image/seguros_destacados/hogar_desktop.webp"
                     >
                     <img 
-                      src="assets/Image/seguros_destacados/hogar_desktop.webp" 
+                      src="assets/Image/seguros_destacados/hogar_mobile.webp" 
                       alt="Seguro de Hogar - Protección para tu vivienda"
                       class="insurance-image"
                     />
@@ -138,6 +138,7 @@
     <div class="help-float" *ngIf="showHelp">
       <!-- Alerta (globo) controlada por tiempo -->
       <div class="help-alert" *ngIf="showAlert" role="status" aria-live="polite">
+        <span class="help-alert-flag" aria-hidden="true"></span>
         <div class="help-alert-content">
           <div class="help-alert-title">¡Hola! Soy su asistente OlivIA.</div>
           <div class="help-alert-subtitle">Cuénteme, ¿qué necesita?</div>
