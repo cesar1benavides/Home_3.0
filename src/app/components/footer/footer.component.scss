@@ -1,37 +1,83 @@
 .footer {
-  background-color: var(--primary-green);
+  background: #0B613E; // ✅ Background específico
   color: var(--white);
-  padding: 60px 0 40px;
+  min-height: 516px; // ✅ Altura mínima en lugar de fija para acomodar contenido
+  padding: 40px 0; // Padding ajustado para la altura fija
+  display: flex;
+  align-items: flex-start; // ✅ Alinear al inicio para mostrar todo el contenido
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1440px; // Alinear con ancho del header
+  margin: 0 auto; // Centrar contenedor
+  padding: 0 32px; // Mismo margen lateral que header desktop
+  overflow: hidden; // Evitar desbordamiento
 }
 
 .footer-content {
   display: grid;
-  grid-template-columns: 2fr 1fr 1.5fr;
-  gap: 60px;
+  grid-template-columns: 1fr 1fr 1fr; // 3 columnas sin logo
+  gap: 24px; // Restablecer un espacio adecuado entre columnas
   margin-bottom: 40px;
+  align-items: flex-start;
+  width: 100%;
+  overflow: visible;
 }
 
+// Logo vertical - TEXTO SIMPLE SIN IMAGEN
+/* Se retiró el bloque de logo de la Superintendencia */
+
 .footer-column {
+  width: 100%;
+  min-width: 0; // Permitir que se encoja si es necesario
+  overflow: visible; // ✅ Cambiar a visible para mostrar contenido completo
+
   .column-title {
-    font-size: 18px;
+    // Títulos - especificaciones exactas corregidas
+    font-family: Bolivar;
     font-weight: 700;
+    font-size: 20px; // ✅ Tamaño específico
+    line-height: 140%;
+    letter-spacing: 0px;
+    color: #FFFFFF; // ✅ Color de texto blanco específico
     margin-bottom: 24px;
-    color: var(--white);
+    word-wrap: break-word; // Permitir romper palabras largas
+    hyphens: auto; // Usar guiones automáticos
   }
+
+  // Todos los textos en blanco - sin colores específicos por columna
 
   .footer-links {
     list-style: none;
 
     li {
-      margin-bottom: 12px;
+      margin-bottom: 8px; // ✅ Reducir margen para mostrar más opciones
 
       .footer-link {
-        color: var(--white);
-        text-decoration: none;
+        // Redirecciones - especificaciones exactas
+        font-family: Bolivar;
+        font-weight: 400;
         font-size: 14px;
-        line-height: 1.5;
+        line-height: 140%;
+        letter-spacing: 0px;
+        vertical-align: middle;
+        
+        color: #B3F2D4; // Enlaces color verde claro
+        text-decoration: none;
         opacity: 0.9;
         transition: opacity 0.3s ease;
+        
+        // Manejo de texto largo optimizado
+        word-wrap: break-word;
+        word-break: break-word;
+        hyphens: auto;
+        display: block;
+        max-width: 100%;
+        overflow-wrap: break-word; // ✅ Mejorar manejo de palabras largas
 
         &:hover {
           opacity: 1;
@@ -42,12 +88,17 @@
   }
 
   .contact-info {
+    width: 100%;
+    
     .contact-item {
       display: flex;
-      align-items: center;
-      gap: 12px;
+      align-items: flex-start; // Alinear al inicio para textos largos
+      gap: 8px; // Gap reducido para mejor espaciado
       margin-bottom: 16px;
       font-size: 14px;
+      flex-wrap: wrap; // Permitir wrap si es necesario
+      min-width: 0; // Permitir encogimiento
+      width: 100%;
 
       i {
         color: var(--accent-yellow);
@@ -56,13 +107,49 @@
         flex-shrink: 0;
       }
 
-      .contact-text {
-        color: var(--white);
+      .channel-label {
+        // Texto del canal - color verde claro
+        color: #B3F2D4;
+        font-family: Bolivar;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 140%;
+        letter-spacing: 0px;
+        margin-right: 8px;
+        flex-shrink: 0; // No encoger la etiqueta
+        white-space: nowrap; // Mantener en una línea
+      }
+
+      .channel-value {
+        // Número/dirección del canal - color verde claro
+        color: #B3F2D4;
+        font-family: Bolivar;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 140%;
+        letter-spacing: 0px;
+        
+        // Manejo de texto largo para valores
+        word-wrap: break-word;
+        word-break: break-all; // Permitir romper en cualquier carácter si es necesario
+        min-width: 0; // Permitir encogimiento
+        flex: 1; // Ocupar espacio disponible
+      }
+
+      .channel-other {
+        // "Otros canales de atención" - misma tipografía que redirecciones
+        font-family: Bolivar;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 140%;
+        letter-spacing: 0px;
+        vertical-align: middle;
+        color: #B3F2D4; // Color verde claro
         opacity: 0.9;
       }
 
       .contact-link {
-        color: var(--white);
+        color: #B3F2D4; // Color verde claro
         text-decoration: none;
         opacity: 0.9;
         transition: opacity 0.3s ease;
@@ -74,66 +161,179 @@
       }
     }
   }
-}
 
-.footer-divider {
-  height: 1px;
-  background-color: var(--light-green);
-  margin: 40px 0;
-}
-
-.footer-bottom {
-  .bottom-links {
+  // Botón acordeón para móvil
+  .btn-accordion {
+    width: 100%;
+    background: none;
+    border: none;
     display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    cursor: pointer;
+  }
 
-    .bottom-link {
-      color: var(--white);
-      text-decoration: none;
-      font-size: 14px;
-      opacity: 0.9;
-      transition: opacity 0.3s ease;
+  .chevron {
+    width: 16px;
+    height: 16px;
+    border-right: 2px solid #FFFFFF;
+    border-bottom: 2px solid #FFFFFF;
+    transform: rotate(-45deg);
+    transition: transform 0.2s ease;
 
-      &:hover {
-        opacity: 1;
-        text-decoration: underline;
-      }
+    &.open {
+      transform: rotate(135deg);
     }
+  }
+
+  .chevron-img {
+    width: 18px; // width: 18
+    height: 18px; // height: 18
+    opacity: 1; // opacity: 1
+    transform: rotate(0deg); // angle: 0
+    transition: transform 0.2s ease;
+    display: inline-block;
+    object-fit: contain;
+    flex-shrink: 0;
+    margin-left: 8px;
+    filter: brightness(0) invert(1); // Icono blanco sin fondo
+
+    &.open {
+      transform: rotate(180deg);
+    }
+  }
+
+  .divider {
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.6);
+    margin: 8px 0 16px 0;
+  }
+}
+
+/* Se eliminaron el separador y la franja inferior de enlaces/redes */
+
+// Copyright
+.footer-copyright {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  width: 100%;
+
+  p {
+    font-family: Bolivar;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 140%;
+    letter-spacing: 0px;
+    color: var(--white);
+    opacity: 0.8;
+    margin: 0;
+    
+    // Manejo de texto largo para copyright
+    word-wrap: break-word;
+    hyphens: auto;
+    max-width: 100%;
+    padding: 0 16px; // Padding para que no toque los bordes
   }
 }
 
 // Responsive Design
 @media (max-width: 1024px) {
+  .container {
+    padding: 0 24px; // Padding reducido en tablet
+  }
+
   .footer-content {
-    gap: 40px;
+    gap: 24px; // ✅ Gap más reducido para dar más espacio a las columnas
+  }
+
+  .footer-column {
+    .column-title {
+      // Mantener especificaciones completas pero con tamaño ajustado para tablet
+      font-size: 18px; // ✅ Proporcional a la nueva especificación de 20px
+    }
+
+    // Todos los textos en blanco - sin colores específicos
+
+    .footer-links {
+      li .footer-link {
+        // Mantener todas las especificaciones pero con tamaño reducido
+        font-size: 13px;
+      }
+    }
+
+    .contact-info .contact-item {
+      .channel-label, .channel-value, .channel-other {
+        font-size: 13px;
+        color: #FFFFFF; // ✅ Asegurar color blanco en tablet
+      }
+    }
+  }
+
+  .footer-bottom {
+    .bottom-links .bottom-link {
+      max-width: 180px;
+      font-size: 13px;
+    }
   }
 }
 
 @media (max-width: 768px) {
   .footer {
+    height: auto; // Altura automática en móvil
+    min-height: 400px; // Altura mínima
     padding: 40px 0 30px;
   }
 
+  .footer-logo {
+    text-align: left;
+    margin-bottom: 12px;
+    width: 100%;
+    height: auto;
+    .sf-logo { height: 120px; width: auto; }
+  }
+
+  .container {
+    padding: 0 16px; // Padding mínimo en móvil
+  }
+
   .footer-content {
-    grid-template-columns: 1fr;
-    gap: 40px;
-    margin-bottom: 30px;
+    grid-template-columns: 1fr; // Una sola columna en móvil
+    gap: 30px; // Gap más pequeño
+    margin-bottom: 24px;
   }
 
   .footer-column {
     .column-title {
-      font-size: 16px;
+      // Mantener especificaciones completas en móvil
+      font-family: Bolivar;
+      font-weight: 700;
+      font-size: 16px; // ✅ Tamaño ajustado para móvil
+      line-height: 140%;
+      letter-spacing: 0px;
+      color: #FFFFFF; // ✅ Color de texto blanco
       margin-bottom: 20px;
     }
+
+    // Todos los textos en blanco - sin colores específicos
 
     .footer-links {
       li {
         margin-bottom: 10px;
 
         .footer-link {
+          // Mantener especificaciones completas en móvil
+          font-family: Bolivar;
+          font-weight: 400;
           font-size: 13px;
+          line-height: 140%;
+          letter-spacing: 0px;
+          vertical-align: middle;
+          // Asegurar que se ajuste en móvil
+          word-break: break-word;
+          hyphens: auto;
         }
       }
     }
@@ -162,6 +362,14 @@
         font-size: 13px;
       }
     }
+  }
+}
+
+@media (min-width: 769px) {
+  // Ocultar chevrons y divisores en desktop
+  .chevron-img,
+  .divider {
+    display: none !important;
   }
 }
 
@@ -222,6 +430,10 @@
     }
   }
 }
+
+
+
+
 
 
 

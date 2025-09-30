@@ -1,0 +1,45 @@
+<!-- Sección de Acciones Rápidas -->
+<section class="quick-actions" role="region" aria-labelledby="quick-actions-title">
+  <div class="quick-actions__container">
+    <!-- Título de la sección -->
+    <h2 id="quick-actions-title" class="quick-actions__title">
+      Acciones rápidas
+    </h2>
+    
+    <!-- Contenedor de botones -->
+    <div class="quick-actions__buttons">
+      <!-- Botón 1: Reporte su emergencia -->
+      <button 
+        class="quick-actions__button"
+        type="button"
+        aria-label="Reporte su emergencia"
+        (click)="onEmergencyReport()"
+      >
+        <img src="assets/Image/Iconos/Acciones_rapidas/Emergencia.png" alt="" class="qa-icon" />
+        <span class="button-text">Reporte su emergencia</span>
+      </button>
+      
+      <!-- Botón 2: Solicite su indemnización -->
+      <button 
+        class="quick-actions__button quick-actions__button--white"
+        type="button"
+        aria-label="Solicite su indemnización"
+        (click)="onIndemnityRequest()"
+      >
+        <img src="assets/Image/Iconos/Acciones_rapidas/Indemnizacion.png" alt="" class="qa-icon" />
+        <span class="button-text">Solicite su indemnización</span>
+      </button>
+      
+      <!-- Botón 3: Cotice un seguro -->
+      <button 
+        class="quick-actions__button quick-actions__button--white"
+        type="button"
+        aria-label="Cotice un seguro"
+        (click)="onInsuranceQuote()"
+      >
+        <img src="assets/Image/Iconos/Acciones_rapidas/Compras Digitales.png" alt="" class="qa-icon" />
+        <span class="button-text">Cotice un seguro</span>
+      </button>
+    </div>
+  </div>
+</section>

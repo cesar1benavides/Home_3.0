@@ -11,10 +11,16 @@
     [attr.aria-haspopup]="true"
     type="button"
   >
+    <!-- Icono izquierdo con imagen -->
+    <img *ngIf="leftIconSrc" [src]="leftIconSrc" alt="" class="dropdown-icon-img left" />
+
     <!-- Contenido del botón -->
     <span class="dropdown-label">{{ label }}</span>
     
-    <!-- Icono -->
+    <!-- Icono derecho -->
+    <img *ngIf="rightIconSrc" [src]="rightIconSrc" alt="" class="dropdown-icon-img right" />
+
+    <!-- Icono SVG fallback -->
     <ng-container *ngIf="icon === 'chevron'">
       <svg 
         class="dropdown-icon" 

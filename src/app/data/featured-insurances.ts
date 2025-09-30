@@ -41,28 +41,32 @@ export const FEATURED_INSURANCES: { [key: string]: FeaturedInsurance } = {
     title: 'Seguros de Vida',
     subtitle: 'Disfrute productos para cada integrante de su familia',
     features: [
-      'Seguro de Vida Inversión para el futuro',
-      'Seguro de Vida Integral con ahorro',
-      'Seguro Tranquilidad Adulto Mayor'
+      'Seguro de Vida Inversión: Mientras se cuida, reciba un porcentaje de lo que pagó por su seguro.',
+      'Seguro de Vida Integral: Protejemos a su familia mientras cuida de su bolsillo.',
+      'Seguro Tranquilidad Adulto Mayor: Lo protegemos desde los 65 años ante una situación inesperada.'
     ],
     buttonText: 'Conozca el portafolio',
-    imageUrl: '/lovable-uploads/f261a987-f6c9-42b8-8731-41053b87cf94.png',
-    icon: 'fas fa-user-shield'
+    imageUrl: 'assets/Image/seguros_destacados/vida_desktop.webp',
+    icon: 'fas fa-shield-heart'
   },
   hogar: {
     id: 'hogar',
     title: 'Seguro de Hogar',
     subtitle: 'Conozca el seguro que se ajusta a las necesidades de su familia.',
     features: [
-      'Cubra su hogar contra incendio, terremoto y otros riesgos',
-      'Proteja sus bienes muebles e inmuebles',
-      'Asistencias adicionales para el hogar'
+      'Cubra su hogar ante incendios, lluvias, granizo o vientos fuertes.',
+      'Proteja sus bienes contra daños o hurtos dentro y fuera de su hogar.',
+      'Cuente con asistencias adicionales cómo: cerrajería, plomería, reparaciones y demás.'
     ],
     buttonText: 'Conozca este seguro',
-    imageUrl: '/lovable-uploads/005aa611-4af7-4c1c-a0ee-abc251ff5a22.png',
+    imageUrl: 'assets/Image/seguros_destacados/hogar_desktop.webp',
     icon: 'fas fa-home'
   }
 };
+
+
+
+
 
 
 

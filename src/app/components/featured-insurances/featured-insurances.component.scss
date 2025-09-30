@@ -1,94 +1,172 @@
 .featured-insurances {
   background-color: var(--white);
-  padding: 80px 0;
+  height: 560px; // Altura exacta especificada
+  padding: 32px 0; // Padding ajustado para la nueva altura
   position: relative;
 }
 
+.container {
+  height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  flex-direction: column;
+}
+
 .section-header {
-  text-align: center;
-  margin-bottom: 60px;
+  text-align: left; // ✅ Alineación a la izquierda
+  margin-bottom: 24px; // Margen optimizado
 
   .section-title {
-    font-size: 36px;
+    font-size: 28px; // Título optimizado para altura fija
     font-weight: 700;
-    color: var(--primary-green);
-    margin-bottom: 16px;
+    color: var(--c-lib-tb-primaryD200, #05794A);
+    margin: 0; // Sin margen inferior
+    font-family: Bolivar;
+    text-align: left; // ✅ Asegurar alineación a la izquierda
   }
 
   .section-subtitle {
-    font-size: 18px;
-    color: var(--dark-gray);
-    max-width: 600px;
-    margin: 0 auto;
+    display: none; // Ocultar para optimizar espacio
   }
 }
 
 .tabs-container {
-  margin-bottom: 60px;
+  margin-bottom: 24px; // Margen optimizado para altura fija
 
   .tabs {
     display: flex;
     justify-content: center;
-    gap: 8px;
-    flex-wrap: wrap;
+    gap: 4px; // Gap exacto especificado
+    flex-wrap: nowrap; // Sin wrap para mantener las 4 pestañas en línea
 
-    .tab-button {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 16px 24px;
-      border: 2px solid var(--border-gray);
-      background-color: var(--white);
-      color: var(--dark-gray);
-      border-radius: 8px;
+      .tab-button {
+        // Dimensiones exactas en desktop
+        width: 318.25px; // width
+        height: 40px; // height
+      
+        // Padding exacto especificado
+        padding: 4px; // padding
+      
+      // Estado normal: fondo blanco y borde gris
+        border: 2px solid #E1E1E1; // border-width: 2px
+      background: #FFFFFF;
+      
+      // Border-radius solo en la parte superior
+        border-top-left-radius: 8px; // border-top-left-radius: 8px
+        border-top-right-radius: 8px; // border-top-right-radius: 8px
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      
       cursor: pointer;
-      font-weight: 500;
-      font-size: 14px;
+        opacity: 1; // opacity: 1
+      
+      // Tipografía para pestañas NO seleccionadas
+      font-family: Bolivar;
+      font-weight: 700;
+      font-style: bold;
+      font-size: 16px;
+      line-height: 140%;
+      letter-spacing: 0px;
+      color: #666666; // Color de texto para pestañas no seleccionadas
+      
       transition: all 0.3s ease;
-      min-width: 120px;
-      justify-content: center;
+      
+      display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px; // gap: 4px
 
       &:hover {
-        border-color: var(--light-green);
-        color: var(--primary-green);
+        background-color: #F8F8F8; // Hover gris claro para pestañas no seleccionadas
+        border-color: #CCCCCC; // Borde gris más oscuro en hover
+        transform: translateY(-1px); // Efecto sutil
       }
 
       &.active {
-        background-color: var(--light-green);
-        border-color: var(--light-green);
-        color: var(--primary-green);
-        box-shadow: 0 4px 12px rgba(27, 77, 62, 0.15);
+        // Estado seleccionado: fondo verde claro y borde verde
+        background: #E5F4EE;
+        border: 2px solid #009056;
+        color: #009056; // Texto verde para contraste
+        
+        // Tipografía para pestaña seleccionada (puede ser diferente si se requiere)
+        font-family: Bolivar;
+        font-weight: 700;
+        font-style: bold;
+        font-size: 16px;
+        line-height: 140%;
+        letter-spacing: 0px;
+        
+        &:hover {
+          background: #E5F4EE; // Mantener el mismo fondo en hover cuando está activo
+          border-color: #009056; // Mantener el mismo borde
+          transform: none; // Sin efecto de hover cuando está activo
+        }
       }
 
       i {
-        font-size: 16px;
+        font-size: 14px; // Icono más pequeño para mejor proporción
+      }
+
+      // Icono por imagen en pestañas
+      .tab-icon-img {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+        display: inline-block;
+      }
+
+      span {
+        white-space: nowrap;
       }
     }
   }
 }
 
 .tab-content {
+  height: calc(100% - 120px); // Ajustar altura para el contenido
+  overflow: hidden; // Evitar scroll en la altura fija
+  
   .content-wrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
+    grid-template-columns: 50% 50%; // ✅ Exactamente 50%-50% según especificación
+    gap: 32px; // Gap reducido para la nueva altura
     align-items: center;
+    height: 100%;
+    width: 100%;
+    // Evitar desbordes de contenido en hijos del grid
+    > .content-text,
+    > .content-image {
+      min-width: 0; // Permite encogimiento horizontal
+      min-height: 0; // Evita que calculen alturas mayores al contenedor
+      overflow: hidden; // Contener cualquier desborde visual
+    }
   }
 
   .content-text {
     .content-title {
-      font-size: 32px;
+      // Características del título especificadas
+      font-family: Bolivar;
       font-weight: 700;
-      color: var(--primary-green);
+      font-size: 28px;
+      line-height: 140%;
+      letter-spacing: 0px;
+      text-align: left; // ✅ Alineación a la izquierda
+      color: var(--c-lib-tb-primaryD200, #05794A);
       margin-bottom: 16px;
-      line-height: 1.2;
     }
 
     .content-subtitle {
-      font-size: 18px;
+      // Descripción - especificaciones exactas
+      font-family: Roboto;
+      font-weight: 400;
+      font-style: regular;
+      font-size: 24px;
+      line-height: 100%; // Line-height específico de 100%
+      letter-spacing: 0px;
       color: var(--dark-gray);
       margin-bottom: 32px;
-      line-height: 1.6;
     }
 
     .features-list {
@@ -100,12 +178,25 @@
         align-items: flex-start;
         gap: 12px;
         margin-bottom: 16px;
+        
+        // Contenido - especificaciones exactas
+        font-family: Bolivar;
+        font-weight: 400;
         font-size: 16px;
-        line-height: 1.6;
+        line-height: 140%;
+        letter-spacing: 0px;
 
         .feature-icon {
-          color: var(--primary-green);
-          font-size: 18px;
+          // Bullets - background especificado
+          background: #086D44;
+          color: #FFFFFF; // Texto blanco para contraste
+          width: 20px;
+          height: 20px;
+          border-radius: 50%; // Círculo completo
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 12px; // Tamaño del ícono check
           margin-top: 2px;
           flex-shrink: 0;
         }
@@ -117,74 +208,168 @@
     }
 
     .btn {
-      padding: 16px 32px;
-      font-size: 16px;
-      font-weight: 600;
+      // Botón - especificaciones exactas actualizadas
+      width: 248px;
+      height: 40px;
+      padding: 8px 16px; // Padding específico
+      gap: 8px; // Gap específico
+      border-radius: 50px; // Border-radius específico
+      background: #FFE16F; // ✅ Fondo amarillo solicitado
+      
+      // Tipografía del botón - especificaciones exactas
+      font-family: Bolivar; // ✅ Fuente específica
+      font-weight: 700; // ✅ Peso Bold específico
+      font-size: 16px; // ✅ Tamaño específico
+      line-height: 140%; // ✅ Interlineado específico
+      letter-spacing: 0px; // ✅ Espaciado específico
+      text-align: center; // ✅ Alineación específica
+      vertical-align: middle; // ✅ Alineación vertical específica
+      color: #086D44; // ✅ Texto verde solicitado
+      
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        background: #FFD93D; // Amarillo ligeramente más oscuro en hover
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(115, 115, 115, 0.2);
+      }
 
       i {
-        margin-left: 8px;
+        margin-left: 8px; // Margen específico para el ícono
+        font-size: 14px;
+        color: #086D44; // Ícono verde para coherencia
       }
     }
   }
 
   .content-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     .image-container {
       position: relative;
       width: 100%;
-      height: 400px;
+      max-width: 500px; // ✅ Aumentar ancho máximo para mejor aprovechamiento del 50%
+      height: 100%; // ✅ Ajustar a la altura disponible del contenedor
+      max-height: 100%;
+      aspect-ratio: 4 / 3; // ✅ Mantener proporción estable sin desbordar
       border-radius: 16px;
-      overflow: hidden;
+      overflow: hidden; // ✅ Contener cualquier contenido interno
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+
+      .responsive-image, .default-image {
+        width: 100%;
+        height: 100%;
+        
+        picture {
+          width: 100%;
+          height: 100%;
+          display: block;
+        }
+      }
 
       .insurance-image {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain; // ✅ Contener imagen sin salirse del contenedor
+        display: block;
         transition: transform 0.3s ease;
 
         &:hover {
-          transform: scale(1.05);
+          transform: scale(1.02);
         }
       }
     }
   }
 }
 
-.floating-help {
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
-  z-index: 100;
+/* Ayuda flotante OlivIA */
+.help-float {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
-  .help-button {
-    background-color: var(--primary-green);
-    color: var(--white);
-    border: none;
-    border-radius: 50px;
-    padding: 16px 24px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 500;
-    font-size: 14px;
-    box-shadow: 0 4px 20px rgba(27, 77, 62, 0.3);
-    transition: all 0.3s ease;
+.help-alert {
+  width: 271px;
+  height: 64px;
+  background: #FFF6D4;
+  border-radius: 8px;
+  box-shadow: 1px 1px 8px 0px #73737329, 1px 4px 4px 0px #7373730A;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 12px 12px 12px;
+}
 
-    &:hover {
-      background-color: #0f3d2e;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 25px rgba(27, 77, 62, 0.4);
-    }
+.help-alert-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
 
-    .help-text {
-      margin-right: 4px;
-    }
+.help-alert-title {
+  color: #0B613E;
+  font-family: Bolivar;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 140%;
+}
 
-    i {
-      font-size: 16px;
-    }
-  }
+.help-alert-subtitle {
+  font-family: Bolivar;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  color: #0B613E;
+}
+
+.help-alert-close {
+  background: none;
+  border: none;
+  color: #0B613E;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.help-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50px;
+  border: 3px solid #FFE16F;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  gap: 4px;
+}
+
+.help-avatar-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.help-avatar-text {
+  font-family: Bolivar;
+  font-weight: 700;
+  font-size: 12px;
+  color: #086D44;
 }
 
 // Responsive Design
@@ -228,11 +413,24 @@
 
 @media (max-width: 768px) {
   .featured-insurances {
-    padding: 60px 0;
+    // Tamaño exacto del contenedor en mobile (imagen guía)
+    width: 328px; // width: 328
+    height: 740.466px; // height: 740.4657592773438
+    margin: 0 auto; // Centrar dentro del viewport
+    padding: 0; // Ajustar para calzar con pestañas
+    opacity: 1; // opacity: 1
+  }
+
+  // Alinear todo el contenido al ancho de las pestañas
+  .container {
+    width: 328px;
+    max-width: 328px;
+    margin: 0 auto;
+    padding: 0; // Quitar padding lateral para alinear con pestañas
   }
 
   .section-header {
-    margin-bottom: 40px;
+    margin: 12px 0; // Compactar dentro del alto fijo
 
     .section-title {
       font-size: 28px;
@@ -244,25 +442,48 @@
   }
 
   .tabs-container {
-    margin-bottom: 40px;
+    width: 328px; // Igual al ancho del contenedor
+    margin: 0 auto 12px auto;
 
     .tabs {
+      width: 328px; // Alinear al ancho exacto
       .tab-button {
-        padding: 12px 16px;
+        // Especificaciones mobile de la imagen de referencia
+        width: 79px; // width: 79
+        height: 50px; // height: 50
+        padding: 4px; // padding: 4px
+        border-width: 2px; // border-width: 2px
+        border-top-left-radius: 8px; // border-top-left-radius: 8px
+        border-top-right-radius: 8px; // border-top-right-radius: 8px
+        opacity: 1; // opacity: 1
+        transform: none; // angle: 0deg
+
+        // Layout vertical: icono arriba, texto abajo
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
         font-size: 12px;
-        min-width: 80px;
+
+        .tab-icon-img {
+          width: 20px;
+          height: 20px;
+        }
 
         span {
-          display: none;
+          display: inline; // Mostrar texto en mobile
         }
       }
     }
   }
 
   .tab-content {
+    width: 328px; // Igual al ancho de las pestañas
+    margin: 0 auto;
     .content-wrapper {
       grid-template-columns: 1fr;
-      gap: 40px;
+      gap: 24px; // Compactar para altura total fija
       text-align: center;
     }
 
@@ -284,7 +505,7 @@
 
     .content-image {
       .image-container {
-        height: 300px;
+        height: 320px; // Alargar ligeramente para ocupar mejor el alto
       }
     }
   }
@@ -352,6 +573,10 @@
     }
   }
 }
+
+
+
+
 
 
 

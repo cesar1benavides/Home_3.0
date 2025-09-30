@@ -77,9 +77,25 @@ export class HeaderComponent implements OnInit {
     // Inicialización del componente
   }
 
-  // Navegación por segmentos
+  // Navegación por segmentos con redirecciones a URLs oficiales
   onSegmentClick(segment: string): void {
     const segmentType = segment as SegmentType;
+    
+    // Redirecciones a las URLs oficiales de Seguros Bolívar
+    const redirectUrls = {
+      'persona': 'https://www.segurosbolivar.com/',
+      'empresa': 'https://www.segurosbolivar.com/empresas',
+      'proveedor': 'https://www.segurosbolivar.com/proveedores',
+      'intermediario': 'https://stgfuerzaventas.bolnet.com.co/'
+    };
+    
+    // Redirigir a la URL correspondiente
+    const url = redirectUrls[segmentType as keyof typeof redirectUrls];
+    if (url) {
+      window.open(url, '_blank');
+    }
+    
+    // Cambiar el segmento activo para efectos visuales
     if (segmentType !== this.activeSegment) {
       this.segmentChange.emit(segmentType);
     }
@@ -105,5 +121,22 @@ export class HeaderComponent implements OnInit {
     
     // También emitir el evento de login para compatibilidad
     this.loginClick.emit();
+  }
+
+  // Mobile drawer
+  isMobileMenuOpen = false;
+  toggleMobileMenu(): void { this.isMobileMenuOpen = !this.isMobileMenuOpen; }
+  closeMobileMenu(): void { this.isMobileMenuOpen = false; }
+
+  // Ejecutar acción de items de Pagos/Ingrese desde el drawer
+  triggerAction(item: DropdownItem): void {
+    try {
+      if (item && typeof item.action === 'function') {
+        item.action();
+        this.closeMobileMenu();
+      }
+    } catch (error) {
+      console.error('Error al ejecutar la acción del item:', error);
+    }
   }
 }

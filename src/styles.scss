@@ -36,7 +36,7 @@ body {
   line-height: 1.6;
   color: var(--text-900);
   background-color: var(--bg);
-  padding-top: 70px; /* Espacio para el header fijo */
+  padding-top: 0; /* Quitar espacio superior para unir el menú al borde del navegador */
 }
 
 /* ===================================================

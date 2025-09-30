@@ -14,53 +14,149 @@
           [class.active]="activeTab === tab.id"
           (click)="selectTab(tab.id)"
         >
-          <i [class]="tab.icon"></i>
+          <img *ngIf="tab.imgSrc" [src]="tab.imgSrc" alt="" class="tab-icon-img" />
           <span>{{ tab.label }}</span>
         </button>
       </div>
     </div>
 
-    <!-- Contenido de la pestaña activa -->
-    <div class="tab-content">
-      <div class="content-wrapper">
-        <div class="content-text">
-          <h3 class="content-title">{{ currentInsurance.title }}</h3>
-          <p class="content-subtitle">{{ currentInsurance.subtitle }}</p>
-          
-          <ul class="features-list">
-            <li *ngFor="let feature of currentInsurance.features" class="feature-item">
-              <i class="fas fa-check feature-icon"></i>
-              <span>{{ feature }}</span>
-            </li>
-          </ul>
+        <!-- Contenido de la pestaña activa -->
+        <div class="tab-content">
+          <div class="content-wrapper">
+            <!-- 50% Texto -->
+            <div class="content-text">
+              <h3 class="content-title">{{ currentInsurance.title }}</h3>
+              <p class="content-subtitle">{{ currentInsurance.subtitle }}</p>
+              
+              <ul class="features-list">
+                <li *ngFor="let feature of currentInsurance.features" class="feature-item">
+                  <i class="fas fa-check feature-icon"></i>
+                  <span>{{ feature }}</span>
+                </li>
+              </ul>
 
-          <button class="btn btn-primary" (click)="onKnowMore()">
-            {{ currentInsurance.buttonText }}
-            <i class="fas fa-arrow-right"></i>
-          </button>
-        </div>
+              <button class="btn btn-primary" (click)="onKnowMore()">
+                {{ currentInsurance.buttonText }}
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
 
-        <div class="content-image">
-          <div class="image-container">
-            <img 
-              [src]="currentInsurance.imageUrl" 
-              [alt]="currentInsurance.title"
-              class="insurance-image"
-            />
+            <!-- 50% Imagen -->
+            <div class="content-image">
+              <div class="image-container">
+                <!-- Imágenes responsive por pestaña -->
+                <!-- Carros -->
+                <div *ngIf="activeTab === 'carros'" class="responsive-image">
+                  <picture>
+                    <source 
+                      media="(max-width: 767px)" 
+                      srcset="assets/Image/seguros_destacados/Autos-mobile.png"
+                    >
+                    <source 
+                      media="(min-width: 768px)" 
+                      srcset="assets/Image/seguros_destacados/Autos-desktop.jpg"
+                    >
+                    <img 
+                      src="assets/Image/seguros_destacados/Autos-desktop.jpg" 
+                      alt="Seguro de Autos - Familia feliz en carro"
+                      class="insurance-image"
+                    />
+                  </picture>
+                </div>
+
+                <!-- Salud -->
+                <div *ngIf="activeTab === 'salud'" class="responsive-image">
+                  <picture>
+                    <source 
+                      media="(max-width: 767px)" 
+                      srcset="assets/Image/seguros_destacados/Salud_mobile.webp"
+                    >
+                    <source 
+                      media="(min-width: 768px)" 
+                      srcset="assets/Image/seguros_destacados/Salud_Desktop.webp"
+                    >
+                    <img 
+                      src="assets/Image/seguros_destacados/Salud_Desktop.webp" 
+                      alt="Seguro de Salud - Atención y bienestar"
+                      class="insurance-image"
+                    />
+                  </picture>
+                </div>
+
+                <!-- Hogar -->
+                <div *ngIf="activeTab === 'hogar'" class="responsive-image">
+                  <picture>
+                    <source 
+                      media="(max-width: 767px)" 
+                      srcset="assets/Image/seguros_destacados/hogar_mobile.webp"
+                    >
+                    <source 
+                      media="(min-width: 768px)" 
+                      srcset="assets/Image/seguros_destacados/hogar_desktop.webp"
+                    >
+                    <img 
+                      src="assets/Image/seguros_destacados/hogar_desktop.webp" 
+                      alt="Seguro de Hogar - Protección para tu vivienda"
+                      class="insurance-image"
+                    />
+                  </picture>
+                </div>
+
+                <!-- Vida -->
+                <div *ngIf="activeTab === 'vida'" class="responsive-image">
+                  <picture>
+                    <source 
+                      media="(max-width: 767px)" 
+                      srcset="assets/Image/seguros_destacados/vida_mobile.webp"
+                    >
+                    <source 
+                      media="(min-width: 768px)" 
+                      srcset="assets/Image/seguros_destacados/vida_desktop.webp"
+                    >
+                    <img 
+                      src="assets/Image/seguros_destacados/vida_desktop.webp" 
+                      alt="Seguro de Vida - Tranquilidad para tu familia"
+                      class="insurance-image"
+                    />
+                  </picture>
+                </div>
+
+                <!-- Imagen por defecto para otras pestañas -->
+                <div *ngIf="activeTab !== 'carros' && activeTab !== 'salud' && activeTab !== 'hogar' && activeTab !== 'vida'" class="default-image">
+                  <img 
+                    [src]="currentInsurance.imageUrl" 
+                    [alt]="currentInsurance.title"
+                    class="insurance-image"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Botón de ayuda flotante -->
-    <div class="floating-help">
-      <button class="help-button">
-        <span class="help-text">¿Necesita Ayuda?</span>
-        <i class="fas fa-question"></i>
+    <!-- Ayuda flotante OlivIA (aparece a los 5s) -->
+    <div class="help-float" *ngIf="showHelp">
+      <!-- Alerta (globo) controlada por tiempo -->
+      <div class="help-alert" *ngIf="showAlert" role="status" aria-live="polite">
+        <div class="help-alert-content">
+          <div class="help-alert-title">¡Hola! Soy su asistente OlivIA.</div>
+          <div class="help-alert-subtitle">Cuénteme, ¿qué necesita?</div>
+        </div>
+        <button class="help-alert-close" type="button" aria-label="Cerrar" (click)="closeAlert()">×</button>
+      </div>
+
+      <!-- Botón OlivIA -->
+      <button class="help-avatar" type="button" aria-label="Abrir OlivIA">
+        <img src="assets/Image/Iconos/Menu/Olivia.png" alt="" class="help-avatar-icon" />
+        <span class="help-avatar-text">OlivIA</span>
       </button>
     </div>
   </div>
 </section>
+
+
+
+
 
 
 

@@ -46,10 +46,11 @@
 
 // Clase específica para botón Pagos
 .dropdown-btn-pagos {
-  width: 142px;
+  width: auto; // Permitir que el texto se vea completo
+  min-width: 142px;
   height: 40px;
   padding: 8px 16px;
-  gap: 8px;
+  gap: 6px; // Menor separación entre icono y texto
   border-radius: 50px;
   background: var(--c-lib-tb-grayscaleWhite); // #FFFFFF
   border: 1px solid var(--c-lib-tb-primaryD100); // #038450
@@ -73,10 +74,11 @@
 
 // Clase específica para botón Ingrese
 .dropdown-btn-ingrese {
-  width: 153px;
+  width: auto; // Permitir que el texto se vea completo
+  min-width: 153px;
   height: 40px;
   padding: 8px 16px;
-  gap: 8px;
+  gap: 6px; // Menor separación entre icono y texto
   border-radius: 50px;
   background: var(--c-lib-tb-secondaryBase); // #FFE16F
   border: none;
@@ -119,11 +121,11 @@
    =================================================== */
 
 .dropdown-label {
-  flex: 1;
+  flex: 0 1 auto; // Evitar que ocupe todo el espacio y forzar ellipsis
   text-align: center;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow: visible; // Mostrar texto completo
+  text-overflow: clip;
 }
 
 .dropdown-icon {
@@ -135,6 +137,18 @@
   &.rotated {
     transform: rotate(180deg);
   }
+}
+
+// Iconos por imagen (izquierda/derecha)
+.dropdown-icon-img {
+  flex-shrink: 0;
+  width: 18px; // Ligeramente más pequeño para dar más espacio al texto
+  height: 18px;
+  object-fit: contain;
+  display: inline-block;
+
+  &.left { margin-right: 6px; }
+  &.right { margin-left: 6px; }
 }
 
 /* ===================================================
@@ -331,22 +345,130 @@
    RESPONSIVE
    =================================================== */
 
-@media (max-width: 767px) {
-  .dropdown-menu {
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%) translateY(-8px);
-    min-width: 250px;
-
-    &.show {
-      transform: translateX(-50%) translateY(0);
-    }
+// MOBILE-FIRST: Estilos por defecto para botones dropdown
+.dropdown-btn-pagos,
+.dropdown-btn-ingrese {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px; // Área táctil mínima
+  min-height: 44px; // Área táctil mínima
+  width: 56px;
+  height: 56px;
+  padding: 6px 4px;
+  gap: 4px;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  opacity: 1;
+  
+  // Icono izquierdo (arriba en mobile)
+  .dropdown-icon-img.left {
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    flex-shrink: 0;
+    object-fit: contain;
   }
+  
+  // Icono derecho (chevron) - ocultar en mobile
+  .dropdown-icon-img.right,
+  .dropdown-icon {
+    display: none;
+  }
+  
+  // Texto (debajo del icono en mobile)
+  .dropdown-label {
+    font-family: var(--c-lib-tb-font-family);
+    font-weight: 700;
+    font-size: 10px;
+    line-height: 1.2;
+    color: var(--c-lib-tb-primaryD200);
+    margin: 0;
+    white-space: nowrap;
+    overflow: visible;
+    flex-shrink: 0;
+  }
+  
+  &:hover {
+    background: rgba(5, 121, 74, 0.05);
+    transform: none;
+    box-shadow: none;
+  }
+}
 
+.dropdown-menu {
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%) translateY(-8px);
+  min-width: 250px;
+
+  &.show {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+// DESKTOP: A partir de 768px
+@media (min-width: 768px) {
   .dropdown-btn-pagos,
   .dropdown-btn-ingrese {
-    min-width: 120px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     width: auto;
+    min-width: 142px;
+    height: 40px;
+    padding: 8px 16px;
+    gap: 6px;
+    border-radius: 50px;
+    
+    // Restaurar estilos desktop
+    &.dropdown-btn-pagos {
+      background: var(--c-lib-tb-grayscaleWhite);
+      border: 1px solid var(--c-lib-tb-primaryD100);
+    }
+    
+    &.dropdown-btn-ingrese {
+      background: var(--c-lib-tb-secondaryBase);
+      border: none;
+    }
+    
+    // Icono izquierdo (lado izquierdo en desktop)
+    .dropdown-icon-img.left {
+      width: 18px;
+      height: 18px;
+      margin-right: 6px;
+    }
+    
+    // Mostrar icono derecho en desktop
+    .dropdown-icon-img.right,
+    .dropdown-icon {
+      display: inline-block;
+    }
+    
+    // Texto (lado derecho en desktop)
+    .dropdown-label {
+      font-size: var(--c-lib-tb-fontsizeBody);
+      line-height: 1.4;
+    }
+    
+    &:hover {
+      background: var(--c-lib-tb-primaryL400);
+      transform: translateY(-1px);
+      box-shadow: var(--c-lib-tb-shadowS);
+    }
+  }
+  
+  .dropdown-menu {
+    left: 0;
+    right: 0;
+    transform: translateY(-8px);
+    min-width: 200px;
+
+    &.show {
+      transform: translateY(0);
+    }
   }
 }
 

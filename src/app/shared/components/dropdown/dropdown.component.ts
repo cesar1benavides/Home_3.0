@@ -45,6 +45,9 @@ export class DropdownComponent implements OnInit, OnDestroy {
   @Input() placeholder: string = 'Seleccionar...';
   @Input() maxHeight: string = '300px';
   @Input() width: string = 'auto';
+  // Iconos con imágenes personalizadas
+  @Input() leftIconSrc?: string;   // Ruta a imagen izquierda
+  @Input() rightIconSrc?: string;  // Ruta a imagen derecha
   
   // Outputs
   @Output() itemSelected = new EventEmitter<DropdownItem>();

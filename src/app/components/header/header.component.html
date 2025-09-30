@@ -1,24 +1,24 @@
-<!-- Header con estructura completa según especificación (puntos 1-7) -->
+<!-- Header responsive: mobile-first con transición a desktop -->
 <header class="hdr">
   <div class="hdr__inner">
-    <!-- Logo (punto 8) -->
+    <!-- Logo Bolívar (izquierda) -->
     <div class="hdr__logo">
       <button class="logo-btn" type="button" aria-label="Ir a inicio">
         <svg 
           class="logo-svg" 
-          width="200" 
-          height="24" 
-          viewBox="0 0 200 24"
+          width="142.36" 
+          height="60" 
+          viewBox="0 0 142.36 60"
           aria-hidden="true"
         >
           <image href="https://dphwwzkmou6a6.cloudfront.net/assets/img/icons/LogotipoSegurosBolivar.svg" 
-                 width="200" 
-                 height="24" />
+                 width="142.36" 
+                 height="60" />
         </svg>
       </button>
     </div>
 
-    <!-- Navegación central por segmentos (puntos 9-14, 27) -->
+    <!-- Navegación central por segmentos (solo desktop) -->
     <nav class="seg" role="tablist" aria-label="Segmentos de usuario">
       <button
         *ngFor="let segment of segments"
@@ -35,47 +35,83 @@
       </button>
     </nav>
 
-    <!-- Acciones del header con nuevos dropdowns -->
+    <!-- Acciones del header -->
     <div class="actions">
-      <!-- Avatar circular de perfil -->
-      <button class="profile-btn" type="button" aria-label="Perfil de usuario">
-        <img 
-          src="assets/Image/946e672fdcedb55ba3675a087beb1ede76f5c97e.jpg" 
-          alt="Avatar de usuario"
-          class="profile-avatar"
-          width="28" 
-          height="28"
-        >
+      <!-- Botón OlivIA (solo desktop) -->
+      <button class="profile-btn" type="button" aria-label="OlivIA - Asistente virtual">
+        <img src="assets/Image/Iconos/Menu/Olivia.png" alt="" class="olivia-icon" />
+        <span class="olivia-text">OlivIA</span>
       </button>
 
-      <!-- Dropdown Pagos con especificaciones exactas -->
+      <!-- Botón Pagos (mobile: icono arriba + texto debajo) -->
       <app-dropdown
         label="Pagos"
         [items]="pagosMenuItems"
         buttonClass="dropdown-btn-pagos"
-        icon="chevron"
+        [leftIconSrc]="'assets/Image/Iconos/Menu/Pagos.png'"
+        [rightIconSrc]="'assets/Image/Iconos/Menu/Desplegar.png'"
+        icon="none"
         position="bottom-left"
         (itemSelected)="onPagosItemSelected($event)"
       ></app-dropdown>
 
-      <!-- Dropdown Ingrese con especificaciones exactas -->
+      <!-- Botón Ingrese (mobile: icono arriba + texto debajo) -->
       <app-dropdown
         label="Ingrese"
         [items]="ingreseMenuItems"
         buttonClass="dropdown-btn-ingrese"
-        icon="arrow"
+        [leftIconSrc]="'assets/Image/Iconos/Menu/Ingreso.png'"
+        [rightIconSrc]="'assets/Image/Iconos/Menu/Desplegar.png'"
+        icon="none"
         position="bottom-right"
         [disabled]="disabled"
         (itemSelected)="onIngreseItemSelected($event)"
       ></app-dropdown>
+
+      <!-- Botón Menú hamburguesa (solo mobile) -->
+      <button class="menu-btn-mobile" type="button" aria-label="Abrir menú" (click)="toggleMobileMenu()">
+        <span class="menu-icon" aria-hidden="true"></span>
+        <span class="menu-label">Menú</span>
+      </button>
     </div>
 
-    <!-- Menú móvil (punto 29 <768px) -->
-    <select class="mobile-segment-select" aria-label="Seleccionar segmento">
-      <option *ngFor="let segment of segments" [value]="segment.key" [selected]="activeSegment === segment.key">
-        {{ segment.label }}
-      </option>
-    </select>
+  </div>
+
+  <!-- Drawer móvil -->
+  <div class="mobile-drawer" *ngIf="isMobileMenuOpen" (click)="closeMobileMenu()">
+    <nav class="drawer-panel" (click)="$event.stopPropagation()" aria-label="Menú móvil">
+      <button class="drawer-close" type="button" aria-label="Cerrar" (click)="closeMobileMenu()">×</button>
+      <!-- Secciones móviles con opciones de desktop -->
+      <div class="drawer-sections">
+        <section class="drawer-section">
+          <h3 class="drawer-title">Pagos</h3>
+          <ul class="drawer-items">
+            <li *ngFor="let item of pagosMenuItems">
+              <button class="drawer-item" type="button" (click)="triggerAction(item)">
+                {{ item.label }}
+              </button>
+            </li>
+          </ul>
+        </section>
+
+        <section class="drawer-section">
+          <h3 class="drawer-title">Ingrese</h3>
+          <ul class="drawer-items">
+            <li *ngFor="let item of ingreseMenuItems">
+              <button class="drawer-item" type="button" (click)="triggerAction(item)">
+                {{ item.label }}
+              </button>
+            </li>
+          </ul>
+        </section>
+      </div>
+      <ul class="drawer-links">
+        <li><button class="drawer-link" (click)="onSegmentClick('persona'); closeMobileMenu()">Soy persona natural</button></li>
+        <li><button class="drawer-link" (click)="onSegmentClick('empresa'); closeMobileMenu()">Soy empresa</button></li>
+        <li><button class="drawer-link" (click)="onSegmentClick('intermediario'); closeMobileMenu()">Soy intermediario</button></li>
+        <li><button class="drawer-link" (click)="onSegmentClick('proveedor'); closeMobileMenu()">Soy proveedor</button></li>
+      </ul>
+    </nav>
   </div>
 </header>
 

@@ -1,0 +1,209 @@
+// Sección de Acciones Rápidas con especificaciones exactas
+
+.quick-actions {
+  width: 100%; // Ancho completo
+  height: 202px; // Altura exacta especificada
+  padding: 32px 0; // Padding vertical, sin horizontal
+  opacity: 1; // Opacidad especificada
+  background-color: var(--c-lib-tb-grayscaleWhite, #ffffff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quick-actions__container {
+  width: 100%;
+  max-width: 1200px; // Mismo max-width que el banner para alinear
+  margin: 0 auto; // Centrar igual que el banner
+  padding: 0 32px; // Padding horizontal igual al banner (--banner-padding-horizontal)
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 32px; // Gap exacto especificado
+}
+
+.quick-actions__title {
+  font-family: var(--c-lib-tb-font-family, 'Bolivar');
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.3;
+  color: var(--c-lib-tb-primaryD200, #05794A);
+  margin: 0;
+  text-align: left;
+}
+
+.quick-actions__buttons {
+  display: flex;
+  gap: 32px; // Gap entre botones
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.quick-actions__button {
+  // Dimensiones exactas especificadas
+  width: 421.6666564941406px; 
+  height: 67px;
+  
+  // Estilos visuales exactos
+  background: #FFE16F; // Color exacto especificado
+  border-radius: 8px; // Border radius exacto
+  border: none;
+  padding: 16px; // Padding exacto
+  opacity: 1; // Opacidad exacta
+  
+  // Sombras exactas especificadas
+  box-shadow: 
+    0px 0px 6px 0px rgba(115, 115, 115, 0.16),
+    0px 2px 4px 0px rgba(115, 115, 115, 0.16);
+  
+  // Layout interno
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; // Gap interno especificado
+
+  .qa-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    display: inline-block;
+  }
+  
+  // Interactividad
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  // Tipografía
+  .button-text {
+    font-family: var(--c-lib-tb-font-family, 'Bolivar');
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.4;
+    color: var(--c-lib-tb-primaryD200, #05794A);
+    text-align: center;
+    margin: 0;
+  }
+  
+  // Estados interactivos
+  &:hover {
+    background: #FFD93D; // Amarillo ligeramente más oscuro
+    transform: translateY(-2px);
+    box-shadow: 
+      0px 2px 8px 0px rgba(115, 115, 115, 0.2),
+      0px 4px 6px 0px rgba(115, 115, 115, 0.2);
+  }
+}
+
+// Variante de botón con fondo blanco
+.quick-actions__button--white {
+  background: #FFFFFF; // Fondo blanco especificado
+  border: 1px solid #E5E5E5; // Borde sutil para definición
+  
+  &:hover {
+    background: #F8F8F8; // Gris muy claro en hover
+    transform: translateY(-2px);
+    box-shadow: 
+      0px 2px 8px 0px rgba(115, 115, 115, 0.2),
+      0px 4px 6px 0px rgba(115, 115, 115, 0.2);
+  }
+  
+  &:active {
+    transform: translateY(0);
+    box-shadow: 
+      0px 0px 6px 0px rgba(115, 115, 115, 0.16),
+      0px 2px 4px 0px rgba(115, 115, 115, 0.16);
+  }
+  
+  &:focus-visible {
+    outline: 2px solid var(--c-lib-tb-primaryL100);
+    outline-offset: 2px;
+  }
+}
+
+// Responsive Design
+@media (max-width: 1440px) {
+  .quick-actions__container {
+    max-width: 1200px; // Mantener alineación con banner
+    padding: 0 32px; // Padding igual al banner
+  }
+  
+  .quick-actions__button {
+    width: calc((100% - 64px) / 3); // Ancho calculado para 3 botones con gaps
+    min-width: 280px; // Ancho mínimo
+  }
+}
+
+@media (max-width: 1024px) {
+  .quick-actions {
+    height: auto; // Altura automática en tablet
+    padding: 24px 0; // Solo padding vertical
+  }
+  
+  .quick-actions__container {
+    padding: 0 24px; // Padding reducido para tablet
+    gap: 24px; // Gap reducido
+  }
+  
+  .quick-actions__buttons {
+    gap: 16px; // Gap reducido entre botones
+    flex-wrap: wrap; // Permitir wrap si es necesario
+  }
+  
+  .quick-actions__button {
+    width: calc((100% - 32px) / 3); // Recalcular ancho
+    min-width: 250px;
+    height: 60px; // Altura ligeramente reducida
+  }
+}
+
+@media (max-width: 768px) {
+  .quick-actions {
+    width: 100%;
+    height: auto;
+    padding: 20px 0; // Solo padding vertical
+  }
+  
+  .quick-actions__container {
+    padding: 0 16px; // Padding igual al hero-section en móvil
+  }
+  
+  .quick-actions__title {
+    font-size: 24px; // Título más pequeño en móvil
+    text-align: center; // Centrar en móvil
+  }
+  
+  .quick-actions__container {
+    gap: 20px;
+  }
+  
+  .quick-actions__buttons {
+    flex-direction: column; // Stack vertical en móvil
+    gap: 16px;
+  }
+  
+  .quick-actions__button {
+    width: 100%; // Ancho completo en móvil
+    height: 56px; // Altura optimizada para touch
+    min-width: unset;
+    
+    .button-text {
+      font-size: 15px; // Texto ligeramente más pequeño
+    }
+  }
+}
+
+// Accesibilidad
+@media (prefers-reduced-motion: reduce) {
+  .quick-actions__button {
+    transition: none;
+    
+    &:hover {
+      transform: none;
+    }
+    
+    &:active {
+      transform: none;
+    }
+  }
+}

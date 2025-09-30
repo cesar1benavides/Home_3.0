@@ -7,19 +7,29 @@ import { FEATURED_INSURANCES, FeaturedInsurance } from '../../data/featured-insu
   styleUrls: ['./featured-insurances.component.scss']
 })
 export class FeaturedInsurancesComponent implements OnInit {
-  activeTab = 'autos';
+  activeTab = 'carros';
   featuredInsurances = FEATURED_INSURANCES;
-  currentInsurance: FeaturedInsurance = FEATURED_INSURANCES['autos'];
+  currentInsurance: FeaturedInsurance = FEATURED_INSURANCES['carros'] || FEATURED_INSURANCES['autos'];
+  showHelp = true; // Burbuja siempre visible
+  showAlert = false;
 
   tabs = [
-    { id: 'autos', label: 'Carros', icon: 'fas fa-car' },
-    { id: 'salud', label: 'Salud', icon: 'fas fa-heartbeat' },
-    { id: 'vida', label: 'Vida', icon: 'fas fa-user-shield' },
-    { id: 'hogar', label: 'Hogar', icon: 'fas fa-home' }
+    { id: 'carros', label: 'Carros', imgSrc: 'assets/Image/Iconos/Seguros_destacados/Autos.png' },
+    { id: 'salud', label: 'Salud', imgSrc: 'assets/Image/Iconos/Seguros_destacados/Salud (2).png' },
+    { id: 'vida', label: 'Vida', imgSrc: 'assets/Image/Iconos/Seguros_destacados/Vida.png' },
+    { id: 'hogar', label: 'Hogar', imgSrc: 'assets/Image/Iconos/Seguros_destacados/Hogar.png' }
   ];
 
   ngOnInit() {
     this.updateCurrentInsurance();
+    // Burbuja siempre visible; mostrar alerta a los 5s y ocultarla a los 10s
+    setTimeout(() => {
+      this.showAlert = true;
+    }, 5000);
+
+    setTimeout(() => {
+      this.showAlert = false;
+    }, 10000);
   }
 
   selectTab(tabId: string) {
@@ -28,14 +38,26 @@ export class FeaturedInsurancesComponent implements OnInit {
   }
 
   updateCurrentInsurance() {
-    this.currentInsurance = this.featuredInsurances[this.activeTab];
+    this.currentInsurance = this.featuredInsurances[this.activeTab] || this.featuredInsurances['autos'];
   }
 
   onKnowMore() {
     console.log('Conocer más sobre:', this.currentInsurance.title);
     // Aquí se puede implementar la lógica para redirigir a la página de detalles
   }
+
+  closeHelp() {
+    this.showHelp = false;
+  }
+
+  closeAlert() {
+    this.showAlert = false;
+  }
 }
+
+
+
+
 
 
 

@@ -15,11 +15,11 @@
 }
 
 .hero__content {
-  /* Punto 6: Estructura en 2 columnas */
+  /* Punto 6: Estructura en 2 columnas 50%-50% */
   display: grid;
-  grid-template-columns: var(--left-column-width) var(--right-column-width);
+  grid-template-columns: 50% 50%;
   /* Punto 8: Gap entre columnas */
-  gap: var(--column-gap);
+  gap: 32px;
   /* Punto 9: Alinear verticalmente al centro */
   align-items: center;
   width: 100%;
@@ -78,7 +78,7 @@
   /* Radio pill */
   border-radius: var(--radius-pill);
   /* Padding interno */
-  padding: 0 16px;
+  padding: 0 12px 0 16px; // Ajustar para dar más espacio al botón
     display: flex;
     align-items: center;
   gap: 8px;
@@ -135,33 +135,36 @@
       }
     }
 
-    .search-button {
-  /* Botón lupa (círculo 28px, fondo --green-700, icono blanco) */
-  width: 28px;
-  height: 28px;
-  background-color: var(--green-700);
-      border: none;
-      border-radius: 50%;
-  color: var(--bg);
-  cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  .search-button {
+    /* Botón lupa con especificación solicitada */
+    width: 40px;
+    height: 40px;
+    background: #FFE16F;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px; // 8px arriba y abajo
+    transition: transform 0.1s ease;
 
-      &:hover {
-    background-color: var(--green-600);
-        transform: scale(1.05);
-      }
+    &:hover { transform: scale(1.03); }
+    &:active { transform: scale(0.97); }
 
-  &:active {
-    transform: scale(0.95);
-      }
-  
-  svg {
-    width: 14px;
-    height: 14px;
+    .search-icon-img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      display: block;
     }
+  }
+
+  /* Asegurar que el placeholder quepa completo */
+  .search-input {
+    min-width: 0;
+    flex: 1 1 auto;
+    &::placeholder { white-space: nowrap; }
   }
 
 /* Resultados de búsqueda (mantener funcionalidad existente) */
@@ -309,12 +312,14 @@
 }
 
 .hero-banner {
-  width: 100%;
-  max-width: 640px;
-  /* Mantener proporción apropiada */
-  aspect-ratio: 1.6 / 1;
+  width: 100%; /* Ancho completo del contenedor */
+  max-width: 632.5px; /* Máximo según especificación */
+  height: auto; /* Altura automática para mantener proporción */
+  min-height: 300px; /* Altura mínima para garantizar visualización */
   position: relative;
   cursor: default;
+  opacity: 1; /* Opacidad especificada */
+  aspect-ratio: 1.65; /* Proporción calculada 632.5/383.43 */
   
   /* Optimización para performance */
   will-change: transform;
@@ -331,15 +336,14 @@
 .banner-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain; /* Mostrar imagen completa sin cortar */
   object-position: center;
   /* Anti-aliasing para imágenes de alta calidad */
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
-  /* Bordes suaves para mejor integración visual */
-  border-radius: var(--radius-card-large);
-  /* Sombra sutil para profundidad */
-  box-shadow: var(--c-lib-tb-shadowM);
+  /* Quitar borde y sombra según solicitud */
+  border-radius: 0;
+  box-shadow: none;
 }
 
 /* F. Tamaños y márgenes */
@@ -361,17 +365,20 @@
 
 /* H. Responsive Design - Punto 33 */
 
-/* >=1280px: proporción 55%/45%, banner optimizado */
+/* >=1280px: proporción 50%/50%, banner optimizado */
 @media (min-width: 1280px) {
   .hero__content {
-    grid-template-columns: 45% 55%;
+    grid-template-columns: 50% 50%;
     max-width: 1200px;
     margin: 0 auto;
   }
   
   .hero-banner {
-    max-width: 680px;
-    aspect-ratio: 1.8 / 1; /* Proporción más amplia para desktop */
+    width: 100%; /* Ancho completo para mejor adaptación */
+    max-width: 632.5px; /* Máximo según especificación */
+    height: auto; /* Altura automática */
+    min-height: 320px; /* Altura mínima */
+    aspect-ratio: 1.65; /* Proporción exacta */
   }
   
   .hero__title {
@@ -387,8 +394,11 @@
   }
   
   .hero-banner {
-    max-width: 500px;
-    aspect-ratio: 1.6 / 1; /* Proporción intermedia */
+    width: 100%; /* Ancho completo para tablet */
+    height: auto; /* Altura automática para tablet */
+    max-width: 500px; /* Límite máximo */
+    min-height: 280px; /* Altura mínima para tablet */
+    aspect-ratio: 1.65; /* Proporción calculada 632.5/383.43 */
   }
   
   .hero__title {
@@ -422,14 +432,16 @@
   }
   
   .hero-banner {
-    max-width: 100%;
-    height: 240px;
-    aspect-ratio: auto; /* Permitir altura fija en móvil */
+    width: 100%; /* Ancho completo en móvil */
+    max-width: 100%; /* Sin restricción de ancho máximo */
+    height: auto; /* Altura automática en móvil */
+    min-height: 200px; /* Altura mínima reducida para móvil */
+    aspect-ratio: 1.65; /* Mantener proporción */
   }
   
   .banner-image {
     /* En móvil, ajustar para mostrar la imagen móvil optimizada */
-    border-radius: var(--radius-card); /* Bordes menos redondeados en móvil */
+    border-radius: 0; /* Sin bordes redondeados en móvil */
   }
   
   .hero__title {

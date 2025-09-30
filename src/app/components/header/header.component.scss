@@ -1,70 +1,69 @@
 // Header Component SCSS - Metodología BEM (punto 31)
 // Implementa especificaciones de los puntos 1-31
 
-// Header con especificaciones exactas - 1440px width, 60px height
+// Header mobile-first con transición a desktop
 .hdr {
   width: 100%;
-  height: 60px; // Altura exacta 60px
+  height: 60px;
   background-color: var(--c-lib-tb-grayscaleWhite);
-  border-bottom: none; // Eliminar borde, usar solo sombra
+  border-bottom: none;
   position: sticky;
   top: 0;
   z-index: 100;
-  font-family: var(--c-lib-tb-font-family); // Bolivar
+  font-family: var(--c-lib-tb-font-family);
   font-size: var(--c-lib-tb-fontsizeLabel);
   font-weight: 500;
-  // Sombras específicas aplicadas
-  box-shadow: 
-    2px 2px 16px 0px rgba(115, 115, 115, 0.16), 
-    2px 8px 8px 0px rgba(115, 115, 115, 0.04);
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
 
-  // Contenedor interno con ancho 1440px
+  // Contenedor interno - mobile-first
   &__inner {
-    width: 1440px; // Ancho exacto del proyecto
+    width: 100%;
     margin: 0 auto;
-    padding-left: 32px; // Padding específico left
-    padding-right: 32px; // Padding específico right
+    padding-left: 12px;
+    padding-right: 12px;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px; // Gap específico 16px
+    gap: 6px;
   }
 
-  // Logo (punto 8)
+  // Logo mobile-first
   &__logo {
     display: flex;
     align-items: center;
-    margin-right: 16px; // punto 8
+    margin-right: 0;
+    flex-shrink: 0;
     
     .logo-btn {
       background: none;
       border: none;
-      padding: 4px; // zona clicable mínima 32px de alto
+      padding: 0;
       cursor: pointer;
       display: flex;
       align-items: center;
-      min-height: 32px; // punto 8
+      min-height: auto;
       
       &:focus-visible {
-        outline: 2px solid var(--focus-blue);
+        outline: 2px solid var(--c-lib-tb-primaryL100);
         outline-offset: 2px;
         border-radius: 4px;
       }
     }
     
     .logo-svg {
-      height: 24px; // punto 8
-      width: auto;
+      width: 120px; // Optimizado para mobile
+      height: 50px; // Optimizado para mobile
+      opacity: 1;
     }
   }
 }
 
-// Navegación central por segmentos - especificaciones exactas
+// Navegación central por segmentos - oculta por defecto (mobile-first)
 .seg {
-  display: flex;
+  display: none;
   gap: 8px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
   flex: 1;
 
@@ -72,13 +71,13 @@
     height: auto;
     padding: 8px 12px;
     border-radius: 0;
-    border: none; // Sin bordes
+    border: none;
     background: transparent;
-    color: var(--c-lib-tb-primaryD200); // #05794A
-    font-family: var(--c-lib-tb-font-family); // Bolivar
-    font-size: var(--c-lib-tb-fontsizeBody); // 16px
+    color: var(--c-lib-tb-primaryD200);
+    font-family: var(--c-lib-tb-font-family);
+    font-size: var(--c-lib-tb-fontsizeBody);
     font-weight: 700;
-    line-height: 1.4; // 140%
+    line-height: 1.4;
     letter-spacing: 0;
     text-align: center;
     cursor: pointer;
@@ -88,31 +87,17 @@
     align-items: center;
     justify-content: center;
     
-    // Estado hover
     &:hover {
       background-color: var(--c-lib-tb-primaryL400);
       opacity: 0.8;
     }
     
-    // Estado activo
     &.is-active {
-      font-weight: 700; // Mantener el mismo peso
+      font-weight: 700;
       background-color: var(--c-lib-tb-primaryL400);
       position: relative;
-      
-      // Barra inferior de 2px
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background-color: var(--c-lib-tb-primaryD200); // #05794A
-      }
     }
     
-    // Focus visible
     &:focus-visible {
       outline: 2px solid var(--c-lib-tb-primaryL100);
       outline-offset: 2px;
@@ -120,49 +105,118 @@
   }
 }
 
-// Acciones del header con gap específico
+// Acciones del header - mobile-first
 .actions {
   display: flex;
   align-items: center;
-  gap: 16px; // Gap consistente con especificaciones
+  gap: 6px;
   flex-shrink: 0;
+  margin-left: auto;
 }
 
-// Avatar circular de perfil usando tech-block-lib tokens
-.profile-btn {
-  width: 28px;
-  height: 28px;
-  border: 2px solid var(--c-lib-tb-primaryL100);
-  background: var(--c-lib-tb-grayscaleWhite);
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
+// Botón menú - oculto por defecto, visible solo en mobile
+.menu-btn-mobile { 
+  display: none; // Oculto por defecto
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
-  overflow: hidden; // Para que la imagen se recorte en círculo
-  padding: 0; // Sin padding para que la imagen ocupe todo el espacio
-  
-  // Imagen del avatar
-  .profile-avatar {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; // Para mantener proporciones
-    border-radius: 50%; // Circular
+  min-width: 44px;
+  min-height: 44px;
+  width: 56px;
+  height: 56px;
+  padding: 6px 4px; // Igual al de Pagos/Ingrese en móvil
+  background: none;
+  border: none;
+  color: var(--c-lib-tb-primaryD200);
+  cursor: pointer;
+  gap: 4px;
+  opacity: 1;
+  flex-shrink: 0;
+
+  .menu-icon {
+    width: 20px;
+    height: 2px;
+    margin: 11px 0; // Crear altura efectiva de 24px como los íconos de Pagos/Ingrese
+    background: currentColor;
+    position: relative;
+    display: block;
+    border-radius: 2px;
+    flex-shrink: 0;
+    
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: currentColor;
+      border-radius: 2px;
+    }
+    
+    &::before { top: -6px; }
+    &::after { top: 6px; }
   }
   
-  // SVG (fallback)
-  svg {
+  .menu-label {
+    font-family: var(--c-lib-tb-font-family);
+    font-weight: 700;
+    font-size: 10px;
+    line-height: 1.2; // Igual a dropdown labels
+    color: var(--c-lib-tb-primaryD200);
+    margin: 0;
+    text-transform: capitalize;
+    flex-shrink: 0;
+  }
+}
+
+// Botón OlivIA - oculto por defecto (mobile-first)
+.profile-btn {
+  display: none;
+  height: 40px;
+  width: 110px;
+  padding: 8px 16px;
+  border: 2px solid #FFD543;
+  background: #FFF6D4;
+  border-radius: 50px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  opacity: 1;
+  transition: all 0.2s ease;
+  font-family: var(--c-lib-tb-font-family);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--c-lib-tb-primaryD200);
+  
+  // Icono OlivIA por imagen
+  .olivia-icon {
     width: 16px;
     height: 16px;
-    color: var(--c-lib-tb-primaryBase);
+    object-fit: contain;
+    flex-shrink: 0;
+    display: inline-block;
+  }
+  
+  // Texto OlivIA con especificaciones exactas
+  .olivia-text {
+    font-family: Bolivar; // Fuente especificada
+    font-weight: 700; // Peso especificado
+    font-size: 16px; // Tamaño especificado
+    line-height: 140%; // Interlineado especificado
+    letter-spacing: 0px; // Espaciado de letras especificado
+    text-align: center; // Alineación especificada
+    vertical-align: middle; // Alineación vertical especificada
+    color: var(--c-lib-tb-primaryD200);
+    white-space: nowrap; // Evitar que el texto se rompa
   }
   
   // Hover
   &:hover {
-    box-shadow: var(--c-lib-tb-shadowS);
-    border-color: var(--c-lib-tb-primaryBase);
-    background-color: var(--c-lib-tb-primaryL400);
+    box-shadow: 0 2px 4px rgba(255, 213, 67, 0.3);
+    border-color: #E6C037; // Borde m\u00e1s oscuro en hover
+    background-color: #FFF8DC; // Fondo ligeramente m\u00e1s claro en hover
     transform: translateY(-1px);
   }
   
@@ -174,7 +228,7 @@
   
   // Focus visible
   &:focus-visible {
-    outline: 2px solid var(--c-lib-tb-primaryL100);
+    outline: 2px solid #FFD543;
     outline-offset: 2px;
   }
 }
@@ -201,76 +255,264 @@
   }
 }
 
-// Breakpoints responsivos adaptados para 1440px base
-@media (max-width: 1439px) {
+// MOBILE: Mostrar menú hamburguesa solo en mobile (≤768px)
+@media (max-width: 768px) {
+  .menu-btn-mobile {
+    display: flex !important; // Forzar visibilidad en mobile
+  }
+}
+
+// Breakpoints adicionales para tablets y pantallas grandes
+@media (min-width: 769px) and (max-width: 1279px) {
   .hdr__inner {
-    width: 100%; // En pantallas menores usar 100%
-    max-width: 1200px; // Máximo contenido
-    padding-left: 24px; // Reducir padding en pantallas menores
+    width: 100%;
+    max-width: 1200px;
+    padding-left: 24px;
+    padding-right: 24px;
+    gap: 14px;
+  }
+  
+  .seg {
+    gap: 6px;
+  }
+  
+  .seg__item {
+    padding: 6px 10px;
+    font-size: var(--c-lib-tb-fontsizeLabel);
+  }
+  
+  .actions {
+    gap: 14px;
+  }
+}
+
+@media (min-width: 1280px) and (max-width: 1439px) {
+  .hdr__inner {
+    width: 100%;
+    max-width: 1200px;
+    padding-left: 24px;
     padding-right: 24px;
   }
 }
 
-@media (min-width: 768px) and (max-width: 1279px) {
+// ===================================================
+// BREAKPOINTS RESPONSIVE
+// ===================================================
+
+// DESKTOP: A partir de 768px (md breakpoint)
+@media (min-width: 769px) {
+  .hdr {
+    box-shadow: 
+      2px 2px 16px 0px rgba(115, 115, 115, 0.16), 
+      2px 8px 8px 0px rgba(115, 115, 115, 0.04);
+  }
+
   .hdr__inner {
-    padding-left: 16px;
-    padding-right: 16px;
-    gap: 12px; // Reducir gap en tablets
+    width: 1440px;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-left: 32px;
+    padding-right: 32px;
+    gap: 16px;
+    justify-content: space-between;
   }
-  
-  .seg__item {
-    padding: 6px 10px; // Ajustar padding en tablets
-    font-size: var(--c-lib-tb-fontsizeLabel); // 14px en tablets
+
+  // Logo desktop
+  .hdr__logo {
+    margin-right: 16px;
+    
+    .logo-svg {
+      width: 142.36px;
+      height: 60px;
+    }
   }
-  
+
+  // Mostrar navegación de segmentos en desktop
+  .seg {
+    display: flex;
+  }
+
+  // Mostrar botón OlivIA en desktop
+  .profile-btn {
+    display: flex;
+  }
+
+  // Ocultar botón menú en desktop
+  .menu-btn-mobile {
+    display: none;
+  }
+
+  // Ajustar acciones para desktop
   .actions {
-    gap: 12px; // Reducir gap en tablets
+    gap: 16px;
+    margin-left: 0;
+  }
+}
+// Drawer móvil - Design System optimizado
+.mobile-drawer {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+  display: block; // Asegurar visibilidad
+}
+
+.drawer-panel {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 280px;
+  max-width: 85vw;
+  background: var(--c-lib-tb-grayscaleWhite);
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  animation: slideInRight 0.3s ease;
+  
+  // Safe area support (iOS)
+  padding-right: env(safe-area-inset-right);
+}
+
+.drawer-close {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: var(--c-lib-tb-grayscaleD200);
+  cursor: pointer;
+  padding: 16px;
+  min-width: 44px; // Área táctil mínima
+  min-height: 44px; // Área táctil mínima
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &:active {
+    opacity: 0.6;
+  }
+  
+  &:focus-visible {
+    outline: 2px solid var(--c-lib-tb-primaryL100);
+    outline-offset: 2px;
   }
 }
 
-@media (max-width: 767px) {
-  .hdr__inner {
-    padding-left: 16px;
-    padding-right: 16px;
-    gap: 8px; // Gap reducido para móvil
+.drawer-links {
+  list-style: none;
+  padding: 8px 16px 16px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.drawer-sections {
+  padding: 0 16px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.drawer-section {
+  background: var(--c-lib-tb-grayscaleWhite);
+  border: 1px solid var(--c-lib-tb-grayscaleL200);
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+
+.drawer-title {
+  margin: 0 0 8px 0;
+  font-family: var(--c-lib-tb-font-family);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--c-lib-tb-primaryD200);
+}
+
+.drawer-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.drawer-item {
+  width: 100%;
+  text-align: left;
+  padding: 12px 10px;
+  border: 1px solid var(--c-lib-tb-grayscaleL200);
+  border-radius: 10px;
+  background: var(--c-lib-tb-grayscaleWhite);
+  color: var(--c-lib-tb-primaryD200);
+  font-family: var(--c-lib-tb-font-family);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 44px; // Área táctil mínima
+
+  &:hover,
+  &:active {
+    background: var(--c-lib-tb-primaryL400);
+    border-color: var(--c-lib-tb-primaryD100);
+    transform: translateX(-2px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--c-lib-tb-primaryL100);
+    outline-offset: 2px;
+  }
+}
+
+.drawer-link {
+  width: 100%;
+  text-align: left;
+  padding: 14px 16px;
+  border: 1px solid var(--c-lib-tb-grayscaleL200);
+  border-radius: 12px;
+  background: var(--c-lib-tb-grayscaleWhite);
+  color: var(--c-lib-tb-primaryD200);
+  font-family: var(--c-lib-tb-font-family);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 44px; // Área táctil mínima
+  
+  &:hover,
+  &:active {
+    background: var(--c-lib-tb-primaryL400);
+    border-color: var(--c-lib-tb-primaryD100);
+    transform: translateX(-2px);
   }
   
-  .hdr {
-    .hdr__logo .logo-svg {
-      height: 20px; // Logo más pequeño en móvil
-    }
-    
-    .seg {
-      display: none; // Ocultar chips
-    }
-    
-    .mobile-segment-select {
-      display: block; // Mostrar select
-    }
-    
-    .actions {
-      gap: 8px; // Gap móvil más pequeño
-      
-      // Botones más compactos en móvil
-      .btn-pagos,
-      .btn-ingrese {
-        width: auto;
-        min-width: 120px;
-        padding: 6px 12px;
-        font-size: var(--c-lib-tb-fontsizeLabel); // 14px en móvil
-        
-        span {
-          display: inline; // Mantener texto visible
-        }
-      }
-    }
+  &:focus-visible {
+    outline: 2px solid var(--c-lib-tb-primaryL100);
+    outline-offset: 2px;
   }
+}
+
+// Animaciones
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
 }
 
 // Tamaños clicables móviles (punto 26)
 @media (max-width: 767px) {
   .seg__item,
-  .profile-btn,
   .btn-pagos,
   .btn-ingrese {
     min-height: 44px; // punto 26 - áreas ≥44×44px
@@ -279,6 +521,29 @@
   
   .seg__item {
     padding: 0 16px; // punto 26 - aumentar padding en touch
+  }
+  
+  // Bot\u00f3n OlivIA ajustado para m\u00f3vil
+  .profile-btn {
+    width: 100px; // Ancho reducido para móvil
+    height: 36px; // Altura reducida para móvil
+    padding: 6px 12px; // Padding reducido para móvil
+    gap: 6px; // Gap reducido para móvil
+    font-size: 11px; // Fuente ligeramente más pequeña para móvil
+    
+    i {
+      font-size: 13px; // Icono ligeramente más pequeño
+    }
+    
+    .olivia-text {
+      font-family: Bolivar; // Mantener fuente en móvil
+      font-weight: 700; // Mantener peso en móvil
+      font-size: 14px; // Tamaño reducido para móvil
+      line-height: 140%; // Mantener interlineado
+      letter-spacing: 0px; // Mantener espaciado
+      text-align: center; // Mantener alineación
+      vertical-align: middle; // Mantener alineación vertical
+    }
   }
 }
 

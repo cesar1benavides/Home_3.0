@@ -7,8 +7,8 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HeroSectionComponent } from './components/hero-section/hero-section.component';
+import { QuickActionsComponent } from './components/quick-actions/quick-actions.component';
 import { FeaturedInsurancesComponent } from './components/featured-insurances/featured-insurances.component';
-import { PymeSectionComponent } from './components/pyme-section/pyme-section.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DropdownComponent } from './shared/components/dropdown/dropdown.component';
 
@@ -17,8 +17,8 @@ import { DropdownComponent } from './shared/components/dropdown/dropdown.compone
     AppComponent,
     HeaderComponent,
     HeroSectionComponent,
+    QuickActionsComponent,
     FeaturedInsurancesComponent,
-    PymeSectionComponent,
     FooterComponent,
     DropdownComponent
   ],
