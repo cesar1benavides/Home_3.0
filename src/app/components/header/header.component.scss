@@ -105,6 +105,18 @@
   }
 }
 
+// Quitar sombreado (fondo/hover) del botón "Soy persona natural"
+.seg__item[data-segment="persona"] {
+  &:hover {
+    background: transparent;
+    opacity: 1;
+  }
+  &.is-active {
+    background: transparent;
+    box-shadow: none;
+  }
+}
+
 // Acciones del header - mobile-first
 .actions {
   display: flex;
@@ -308,8 +320,8 @@
   }
 
   .hdr__inner {
-    width: 1440px;
-    max-width: 1440px;
+    width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
     padding-left: 32px;
     padding-right: 32px;

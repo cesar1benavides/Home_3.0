@@ -22,14 +22,10 @@ export class FeaturedInsurancesComponent implements OnInit {
 
   ngOnInit() {
     this.updateCurrentInsurance();
-    // Burbuja siempre visible; mostrar alerta a los 5s y ocultarla a los 10s
+    // Burbuja siempre visible; mostrar alerta a los 3s y mantenerla hasta cierre manual (X)
     setTimeout(() => {
       this.showAlert = true;
-    }, 5000);
-
-    setTimeout(() => {
-      this.showAlert = false;
-    }, 10000);
+    }, 3000);
   }
 
   selectTab(tabId: string) {

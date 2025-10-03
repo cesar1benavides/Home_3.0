@@ -39,6 +39,12 @@ body {
   padding-top: 0; /* Quitar espacio superior para unir el menú al borde del navegador */
 }
 
+/* Prevenir scroll horizontal global por contenidos que se desborden accidentalmente */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 /* ===================================================
    SISTEMA DE DESIGN TOKENS - SEGUROS BOLÍVAR
    ===================================================
@@ -535,6 +541,13 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+/* Medios fluidos por defecto: imágenes y SVGs no deben causar overflow */
+img, svg, video, canvas {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 .btn {
